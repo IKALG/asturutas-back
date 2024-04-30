@@ -2,6 +2,7 @@ package com.asturutas.spring.web.app.models;
 
 import java.sql.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,20 +15,30 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(name = "nombre")
 	private String nombre;
+	
+	@Column(name = "usuario")
 	private String usuario;
+	
+	@Column(name = "email")
 	private String email;
-	private String contraseña;
+	
+	@Column(name = "contrasena")
+	private String contrasena;
+	
+	@Column(name = "fechaCreacion")
 	private Date fechaCreacion;
 
 	public Usuario() {
 	}
 
-	public Usuario(String nombre, String usuario, String email, String contraseña, Date fechaCreacion) {
+	public Usuario(String nombre, String usuario, String email, String contrasena, Date fechaCreacion) {
 		this.nombre = nombre;
 		this.usuario = usuario;
 		this.email = email;
-		this.contraseña = contraseña;
+		this.contrasena = contrasena;
 		this.fechaCreacion = fechaCreacion;
 	}
 
@@ -63,12 +74,12 @@ public class Usuario {
 		this.email = email;
 	}
 
-	public String getContraseña() {
-		return contraseña;
+	public String getContrasena() {
+		return contrasena;
 	}
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setContraseña(String contrasena) {
+		this.contrasena = contrasena;
 	}
 
 	public Date getFechaCreacion() {
@@ -82,6 +93,6 @@ public class Usuario {
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", nombre=" + nombre + ", usuario=" + usuario + ", email=" + email
-				+ ", contraseña=" + contraseña + ", fechaCreacion=" + fechaCreacion + "]";
+				+ ", contraseña=" + contrasena + ", fechaCreacion=" + fechaCreacion + "]";
 	}
 }
