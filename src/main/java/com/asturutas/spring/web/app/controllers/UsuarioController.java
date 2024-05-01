@@ -1,24 +1,28 @@
 package com.asturutas.spring.web.app.controllers;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.asturutas.spring.web.app.repositories.UsuarioRepository;
+import com.asturutas.spring.web.app.models.Usuario;
+import com.asturutas.spring.web.app.services.UsuarioService;
 
 @Controller
 public class UsuarioController {
 
-	private final UsuarioRepository usuarioRepository;
+	private final UsuarioService usuarioService;
 
-	public UsuarioController(UsuarioRepository usuarioRepository) {
-		this.usuarioRepository = usuarioRepository;
+	public UsuarioController(UsuarioService usuarioService) {
+		this.usuarioService = usuarioService;
 	}
 
 	@GetMapping("/usuarios")
 	public String mostrarUsuarios(Model model) {
-		model.addAttribute("usuarios", usuarioRepository.findAll());
+		List<Usuario> usuarios = usuarioService.obtenerTodosLosUsuarios();
+		model.addAttribute("usuarios", usuarios);
 		return "lista-usuarios";
 	}
 
