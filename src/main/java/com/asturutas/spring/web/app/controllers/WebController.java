@@ -23,7 +23,7 @@ public class WebController {
 		this.municipioService = municipioService;
 	}
 	
-	// Rutas prueba BBDD
+	// Rutas de prueba BBDD
 
 	@GetMapping("/usuarios")
 	public String mostrarUsuarios(Model model) {
