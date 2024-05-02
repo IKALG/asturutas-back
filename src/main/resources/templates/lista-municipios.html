@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Municipios</title>
+</head>
+<body>
+    <h1>Lista de Municipios</h1>
+	<section>
+	    <span th:each="municipio : ${municipios}">
+	        <span th:text="${municipio.nombre}"></span>
+	    </span>
+	</section>
+</body>
+</html>
