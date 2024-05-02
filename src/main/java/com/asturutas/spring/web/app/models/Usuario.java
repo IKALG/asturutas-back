@@ -12,13 +12,11 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "Usuarios")
 public class Usuario {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
 	
 	@Column(name = "nombre")
 	private String nombre;
 	
+	@Id
 	@Column(name = "usuario")
 	private String usuario;
 	
@@ -40,14 +38,6 @@ public class Usuario {
 		this.email = email;
 		this.contrasena = contrasena;
 		this.fechaCreacion = fechaCreacion;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getNombre() {
@@ -92,7 +82,7 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nombre=" + nombre + ", usuario=" + usuario + ", email=" + email
+		return "Usuario [nombre=" + nombre + ", usuario=" + usuario + ", email=" + email
 				+ ", contraseña=" + contrasena + ", fechaCreacion=" + fechaCreacion + "]";
 	}
 }
