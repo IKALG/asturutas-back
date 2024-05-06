@@ -10,36 +10,25 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="Municipios")
-public class Municipio {
+@Table(name="actividad")
+public class Actividad {
 	@Id
-	@Column(name = "nombre")
+	@Column(name="nombre")
 	private String nombre;
 	
-	@ManyToMany(mappedBy = "municipios")
+	@ManyToMany(mappedBy = "actividades")
     private Set<Ruta> rutas = new HashSet<>();
-	
-	public Municipio() {
-		
-	}
-	
 
-	public Municipio(String nombre, Set<Ruta> rutas) {
+	
+	public Actividad() {
+		super();
+	}
+
+	public Actividad(String nombre, Set<Ruta> rutas) {
 		super();
 		this.nombre = nombre;
 		this.rutas = rutas;
 	}
-
-
-	public Set<Ruta> getRutas() {
-		return rutas;
-	}
-
-
-	public void setRutas(Set<Ruta> rutas) {
-		this.rutas = rutas;
-	}
-
 
 	public String getNombre() {
 		return nombre;
@@ -49,13 +38,18 @@ public class Municipio {
 		this.nombre = nombre;
 	}
 
+	public Set<Ruta> getRutas() {
+		return rutas;
+	}
+
+	public void setRutas(Set<Ruta> rutas) {
+		this.rutas = rutas;
+	}
 
 	@Override
 	public String toString() {
-		return "Municipio [nombre=" + nombre + ", rutas=" + rutas + "]";
+		return "Actividad [nombre=" + nombre + ", rutas=" + rutas + "]";
 	}
 
-
-	
 	
 }

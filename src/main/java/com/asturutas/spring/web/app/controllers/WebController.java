@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.asturutas.spring.web.app.models.Municipio;
 import com.asturutas.spring.web.app.models.Ruta;
@@ -42,11 +43,20 @@ public class WebController {
 		return "lista-municipios";
 	}
 	
+//	@GetMapping("/rutas")
+//	public String mostrarRutas(Model model) {
+//		List<Ruta> rutas = rutaService.obtenerTodasLasRutas();
+//		model.addAttribute("rutas", rutas);
+//		return "lista-rutas";
+//	}
+	
 	@GetMapping("/rutas")
-	public String mostrarRutas(Model model) {
+	public ModelAndView rutas() {
+		ModelAndView model = new ModelAndView();
 		List<Ruta> rutas = rutaService.obtenerTodasLasRutas();
-		model.addAttribute("rutas", rutas);
-		return "lista-rutas";
+		model.setViewName("lista-rutas");
+		model.addObject("rutas",rutas);
+		return model;
 	}
 	
 	// Rutas página web
