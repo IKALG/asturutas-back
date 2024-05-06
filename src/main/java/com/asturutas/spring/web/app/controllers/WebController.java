@@ -5,11 +5,12 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.asturutas.spring.web.app.models.Municipio;
+import com.asturutas.spring.web.app.models.Ruta;
 import com.asturutas.spring.web.app.models.Usuario;
 import com.asturutas.spring.web.app.services.MunicipioService;
+import com.asturutas.spring.web.app.services.RutaService;
 import com.asturutas.spring.web.app.services.UsuarioService;
 
 @Controller
@@ -17,10 +18,12 @@ public class WebController {
 
 	private final UsuarioService usuarioService;
 	private final MunicipioService municipioService;
+	private final RutaService rutaService;
 
-	public WebController(UsuarioService usuarioService, MunicipioService municipioService) {
+	public WebController(UsuarioService usuarioService, MunicipioService municipioService, RutaService rutaService) {
 		this.usuarioService = usuarioService;
 		this.municipioService = municipioService;
+		this.rutaService = rutaService;
 	}
 	
 	// Rutas de prueba BBDD
@@ -37,6 +40,13 @@ public class WebController {
 		List<Municipio> municipios = municipioService.obtenerTodosLosMunicipios();
 		model.addAttribute("municipios", municipios);
 		return "lista-municipios";
+	}
+	
+	@GetMapping("/rutas")
+	public String mostrarRutas(Model model) {
+		List<Ruta> rutas = rutaService.obtenerTodasLasRutas();
+		model.addAttribute("rutas", rutas);
+		return "lista-rutas";
 	}
 	
 	// Rutas página web

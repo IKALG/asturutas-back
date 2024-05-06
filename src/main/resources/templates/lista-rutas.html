@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Rutas</title>
+</head>
+<body>
+    <h1>Lista de Rutas</h1>
+    <table style="text-align: center;">
+        <thead>
+            <tr>
+				<th>ID</th>
+				<th>Nombre</th>
+				<th>Descripcion</th>
+				<th>Distancia</th>
+				<th>Fotos</th>
+                <th>Municipio</th>
+                <th>Usuario</th>
+                <th>Actividad</th>
+                <!-- Agrega más columnas según los atributos de tu entidad Usuario -->
+            </tr>
+        </thead>
+        <tbody> 		
+            <tr th:each="ruta : ${rutas}">
+                <td th:text="${ruta.id}"></td>
+                <td th:text="${ruta.nombre}"></td>
+                <td th:text="${ruta.descripcion}"></td>
+				<td th:text="${ruta.distancia}"></td>
+				<td><img width="33%" th:src="'/imagenes/' + ${ruta.foto_url}"></td>
+				<td th:text="${ruta.municipio}"></td>
+				<td th:text="${ruta.usuario}"></td>				
+				<td th:text="${ruta.actividad}"></td>
+                <!-- Agrega más celdas según los atributos de tu entidad Usuaro -->
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
