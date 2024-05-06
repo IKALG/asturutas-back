@@ -32,14 +32,27 @@
                 <td th:text="${ruta.distancia} + ' km'"></td>
                 <td th:text="${ruta.dificultad}"></td>
                 <td th:text="${ruta.duracion} + ' h'"></td>
-                <td><img width="50%" th:src="'/imagenes/' + ${ruta.foto_url}"></td>
-                <td>
-                    <span th:each="municipio : ${ruta.municipios}" th:text="${municipio.nombre}"></span>
-                </td>
+				<td>
+				    <span th:each="foto : ${ruta.fotos}">
+						<img width="50%" th:src="'/imagenes/' + ${foto.src}">
+					</span>
+				</td>
+                <!-- <td><img width="50%" th:src="'/imagenes/' + ${ruta.foto_url}"></td> -->
+				<td>
+				    <span th:each="municipio, iterStat : ${ruta.municipios}">
+				        <span th:text="${municipio.nombre}"></span>
+				        <!-- Agregar un guion después del nombre del municipio si no es el último elemento -->
+				        <span th:unless="${iterStat.last}"> - </span>
+				    </span>
+				</td>
                 <td th:text="${ruta.usuario}"></td>               
-                <td>
-                    <span th:each="actividad : ${ruta.actividades}" th:text="${actividad.nombre}"></span>
-                </td>
+				<td>
+				    <span th:each="actividad, iterStat : ${ruta.actividades}">
+				        <span th:text="${actividad.nombre}"></span>
+				        <!-- Agregar una coma después del nombre de la actividad si no es el último elemento -->
+				        <span th:unless="${iterStat.last}">, </span>
+				    </span>
+				</td>
                 <td th:text="${ruta.movilidad_reducida ? 'Sí' : 'No'}"></td>
                 <td th:text="${ruta.apto_ninos ? 'Sí' : 'No'}"></td>
                 <td th:text="${ruta.apto_perros ? 'Sí' : 'No'}"></td>

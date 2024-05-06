@@ -1,8 +1,10 @@
 package com.asturutas.spring.web.app.models;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -12,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -37,8 +40,8 @@ public class Ruta {
 	@Column (name="duracion")
 	private float duracion;
 	
-	@Column (name="foto_url")
-	private String foto_url;
+	@OneToMany(mappedBy = "ruta", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Foto> fotos;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "actividad_rutas",
@@ -68,8 +71,9 @@ public class Ruta {
 	public Ruta() {
 	}
 
+
 	public Ruta(Long id, String nombre, String descripcion, float distancia, String dificultad, float duracion,
-			String foto_url, Set<Actividad> actividades, String usuario, Set<Municipio> municipios,
+			List<Foto> fotos, Set<Actividad> actividades, String usuario, Set<Municipio> municipios,
 			boolean movilidad_reducida, boolean apto_ninos, boolean apto_perros) {
 		super();
 		this.id = id;
@@ -78,7 +82,7 @@ public class Ruta {
 		this.distancia = distancia;
 		this.dificultad = dificultad;
 		this.duracion = duracion;
-		this.foto_url = foto_url;
+		this.fotos = fotos;
 		this.actividades = actividades;
 		this.usuario = usuario;
 		this.municipios = municipios;
@@ -86,9 +90,6 @@ public class Ruta {
 		this.apto_ninos = apto_ninos;
 		this.apto_perros = apto_perros;
 	}
-
-
-
 
 
 
@@ -189,16 +190,15 @@ public class Ruta {
 	}
 
 
-
-	public String getFoto_url() {
-		return foto_url;
+	public List<Foto> getFotos() {
+		return fotos;
 	}
 
 
-
-	public void setFoto_url(String foto_url) {
-		this.foto_url = foto_url;
+	public void setFotos(List<Foto> fotos) {
+		this.fotos = fotos;
 	}
+
 
 	public Set<Municipio> getMunicipios() {
 		return municipios;
@@ -228,12 +228,14 @@ public class Ruta {
 		this.actividades = actividades;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Ruta [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", distancia=" + distancia
-				+ ", dificultad=" + dificultad + ", duracion=" + duracion + ", foto_url=" + foto_url + ", actividades="
+				+ ", dificultad=" + dificultad + ", duracion=" + duracion + ", fotos=" + fotos + ", actividades="
 				+ actividades + ", usuario=" + usuario + ", municipios=" + municipios + ", movilidad_reducida="
 				+ movilidad_reducida + ", apto_ninos=" + apto_ninos + ", apto_perros=" + apto_perros + "]";
 	}
+
 	
 }
