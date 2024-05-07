@@ -1,9 +1,9 @@
 package com.asturutas.spring.web.app.models;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -42,7 +42,7 @@ public class Ruta {
 	private float duracion;
 	
 	@OneToMany(mappedBy = "ruta", fetch = FetchType.EAGER)
-    private List<Foto> fotos;
+    private List<Foto> fotos = new ArrayList<>();
 	
 	@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "actividad_rutas",

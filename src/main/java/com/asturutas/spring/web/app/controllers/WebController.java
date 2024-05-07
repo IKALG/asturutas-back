@@ -52,15 +52,6 @@ public class WebController {
 //		return "lista-rutas";
 //	}
 	
-	@GetMapping("/rutas")
-	public ModelAndView rutas() {
-		ModelAndView model = new ModelAndView();
-		List<Ruta> rutas = rutaService.obtenerTodasLasRutas();
-		model.setViewName("lista-rutas");
-		model.addObject("rutas",rutas);
-		return model;
-	}
-	
 	@GetMapping("/crearRuta")
 	public String anadirRuta(Model model) {
         model.addAttribute("ruta", new Ruta()); // Añade una nueva instancia de Ruta al modelo
@@ -75,6 +66,16 @@ public class WebController {
         // Redireccionar a alguna vista después de guardar la ruta
         return "redirect:/rutas"; // Cambia "rutaGuardada" por la URL de la vista que deseas mostrar después de guardar la ruta
     }
+	
+	@GetMapping("/rutas")
+	public ModelAndView rutas() {
+		ModelAndView model = new ModelAndView();
+		List<Ruta> rutas = rutaService.obtenerTodasLasRutas();
+		model.setViewName("lista-rutas");
+		model.addObject("rutas",rutas);
+		return model;
+	}
+
 	
 	// Rutas página web
 

@@ -9,7 +9,6 @@
     <table style="text-align: center;">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Nombre</th>
                 <th>Descripcion</th>
                 <th>Distancia</th>
@@ -26,7 +25,6 @@
         </thead>
         <tbody>         
             <tr th:each="ruta : ${rutas}">
-                <td th:text="${ruta.id}"></td>
                 <td th:text="${ruta.nombre}"></td>
                 <td th:text="${ruta.descripcion}"></td>
                 <td th:text="${ruta.distancia} + ' km'"></td>
