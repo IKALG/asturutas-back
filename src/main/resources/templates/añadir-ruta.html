@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Ruta</title>
+</head>
+<body>
+    <h2>Agregar Ruta</h2>
+    <form action="/guardarRuta" method="post">
+        <label for="nombre">Nombre:</label><br>
+        <input type="text" id="nombre" name="nombre" required><br>
+        <label for="descripcion">Descripción:</label><br>
+        <textarea id="descripcion" name="descripcion" required></textarea><br>
+		<label for="usuario">Usuario:</label><br>
+		<input type="text" id="usuario" name="usuario" required><br>
+        <label for="distancia">Distancia:</label><br>
+        <input type="number" step="any" id="distancia" name="distancia" required><br>
+        <label for="dificultad">Dificultad:</label><br>
+        <select id="dificultad" name="dificultad" required>
+            <option value="Facil">Fácil</option>
+            <option value="Moderado">Moderado</option>
+            <option value="Dificil">Difícil</option>
+        </select><br>
+        <label for="duracion">Duración:</label><br>
+        <input type="number" step="any" id="duracion" name="duracion" required><br>
+        <label for="movilidad_reducida">Movilidad Reducida:</label>
+        <input type="checkbox" id="movilidad_reducida" name="movilidad_reducida"><br>
+        <label for="apto_ninos">Apto para Niños:</label>
+        <input type="checkbox" id="apto_ninos" name="apto_ninos"><br>
+        <label for="apto_perros">Apto para Perros:</label>
+        <input type="checkbox" id="apto_perros" name="apto_perros"><br>
+        <h3>Actividades</h3>
+        <select id="actividades" name="actividades" multiple required>
+            <option value="Senderismo">Senderismo</option>
+            <option value="Ciclismo">Ciclismo</option>
+            <option value="Escalada">Escalada</option>
+			<option value="Miradores">Miradores</option>
+			<option value="Paseo costero">Paseo costero</option>
+        </select><br>
+        <h3>Municipios</h3>
+        <select id="municipios" name="municipios" multiple required>
+			<option value="Allande">Allande</option>
+			<option value="Aller">Aller</option>
+			<option value="Amieva">Amieva</option>
+			<option value="Avilés">Avilés</option>
+			<option value="Belmonte de Miranda">Belmonte de Miranda</option>
+			<option value="Bimenes">Bimenes</option>
+			<option value="Boal">Boal</option>
+			<option value="Cabrales">Cabrales</option>
+			<option value="Cabranes">Cabranes</option>
+			<option value="Candamo">Candamo</option>
+			<option value="Cangas del Narcea">Cangas del Narcea</option>
+			<option value="Cangas de Onís">Cangas de Onís</option>
+			<option value="Caravia">Caravia</option>
+			<option value="Carreño">Carreño</option>
+			<option value="Caso">Caso</option>
+			<option value="Castrillón">Castrillón</option>
+			<option value="Castropol">Castropol</option>
+			<option value="Coaña">Coaña</option>
+			<option value="Colunga">Colunga</option>
+			<option value="Corvera de Asturias">Corvera de Asturias</option>
+			<option value="Cudillero">Cudillero</option>
+			<option value="Degaña">Degaña</option>
+			<option value="El Franco">El Franco</option>
+			<option value="Gijón">Gijón</option>
+			<option value="Gozón">Gozón</option>
+			<option value="Grado">Grado</option>
+			<option value="Grandas de Salime">Grandas de Salime</option>
+			<option value="Ibias">Ibias</option>
+			<option value="Illano">Illano</option>
+			<option value="Illas">Illas</option>
+			<option value="Langreo">Langreo</option>
+			<option value="Laviana">Laviana</option>
+			<option value="Lena">Lena</option>
+			<option value="Llanera">Llanera</option>
+			<option value="Llanes">Llanes</option>
+			<option value="Mieres">Mieres</option>
+			<option value="Morcín">Morcín</option>
+			<option value="Muros de Nalón">Muros de Nalón</option>
+			<option value="Nava">Nava</option>
+			<option value="Noreña">Noreña</option>
+			<option value="Onís">Onís</option>
+			<option value="Oviedo">Oviedo</option>
+			<option value="Parres">Parres</option>
+			<option value="Peñamellera Alta">Peñamellera Alta</option>
+			<option value="Peñamellera Baja">Peñamellera Baja</option>
+			<option value="Pesoz">Pesoz</option>
+			<option value="Piloña">Piloña</option>
+			<option value="Ponga">Ponga</option>
+			<option value="Pravia">Pravia</option>
+			<option value="Proaza">Proaza</option>
+			<option value="Quirós">Quirós</option>
+			<option value="Las Regueras">Las Regueras</option>
+			<option value="Ribadedeva">Ribadedeva</option>
+			<option value="Ribadesella">Ribadesella</option>
+			<option value="Ribera de Arriba">Ribera de Arriba</option>
+			<option value="Riosa">Riosa</option>
+			<option value="Salas">Salas</option>
+			<option value="San Martín de Oscos">San Martín de Oscos</option>
+			<option value="San Martín del Rey Aurelio">San Martín del Rey Aurelio</option>
+			<option value="San Tirso de Abres">San Tirso de Abres</option>
+			<option value="Santa Eulalia de Oscos">Santa Eulalia de Oscos</option>
+			<option value="Santo Adriano">Santo Adriano</option>
+			<option value="Sariego">Sariego</option>
+			<option value="Siero">Siero</option>
+			<option value="Sobrescobio">Sobrescobio</option>
+			<option value="Somiedo">Somiedo</option>
+			<option value="Soto del Barco">Soto del Barco</option>
+			<option value="Tapia de Casariego">Tapia de Casariego</option>
+			<option value="Taramundi">Taramundi</option>
+			<option value="Teverga">Teverga</option>
+			<option value="Tineo">Tineo</option>
+			<option value="Valdés">Valdés</option>
+			<option value="Vegadeo">Vegadeo</option>
+			<option value="Villanueva de Oscos">Villanueva de Oscos</option>
+			<option value="Villaviciosa">Villaviciosa</option>
+			<option value="Villayón">Villayón</option>
+			<option value="Yernes y Tameza">Yernes y Tameza</option>
+        </select><br><br>
+		<!-- <input type="file" id="fotos" name="fotos" multiple> -->
+        <br>
+        <button type="submit">Guardar</button>
+    </form>
+</body>
+</html>

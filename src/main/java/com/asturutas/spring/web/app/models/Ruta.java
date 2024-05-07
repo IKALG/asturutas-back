@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import jakarta.persistence.CascadeType;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -26,6 +26,7 @@ public class Ruta {
 	private Long id;
 	
 	@Column(name="nombre")
+	
 	private String nombre;
 	
 	@Column(name="descripcion")
@@ -40,7 +41,7 @@ public class Ruta {
 	@Column (name="duracion")
 	private float duracion;
 	
-	@OneToMany(mappedBy = "ruta", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "ruta", fetch = FetchType.EAGER)
     private List<Foto> fotos;
 	
 	@ManyToMany(fetch = FetchType.EAGER)

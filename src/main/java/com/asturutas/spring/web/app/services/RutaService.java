@@ -21,6 +21,10 @@ public class RutaService {
 	public List<Ruta> obtenerTodasLasRutas() {
 		return rutaRepository.findAll();
 	}
+	
+	public void guardarRuta(Ruta ruta) {
+		rutaRepository.save(ruta);
+	}
 
 
 	public RutaRepository getRutaRepository() {
