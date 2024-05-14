@@ -2,12 +2,18 @@ package com.asturutas.spring.web.app.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.asturutas.spring.web.app.models.Usuario;
 import com.asturutas.spring.web.app.repositories.UsuarioRepository;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Service
+@Getter
+@Setter
 public class UsuarioService {
 	
 	private final UsuarioRepository usuarioRepository;

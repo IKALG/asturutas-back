@@ -8,9 +8,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name="actividad")
+@Getter
+@Setter
+@ToString
 public class Actividad {
 	@Id
 	@Column(name="nombre")
@@ -29,27 +35,4 @@ public class Actividad {
 		this.nombre = nombre;
 		this.rutas = rutas;
 	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public Set<Ruta> getRutas() {
-		return rutas;
-	}
-
-	public void setRutas(Set<Ruta> rutas) {
-		this.rutas = rutas;
-	}
-
-	@Override
-	public String toString() {
-		return "Actividad [nombre=" + nombre + ", rutas=" + rutas + "]";
-	}
-
-	
 }

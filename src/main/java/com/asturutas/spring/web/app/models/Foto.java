@@ -8,9 +8,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name="Fotos")
+@Getter
+@Setter
+@ToString
 public class Foto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,36 +40,4 @@ public class Foto {
 		this.src = src;
 		this.ruta = ruta;
 	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getSrc() {
-		return src;
-	}
-
-	public void setSrc(String src) {
-		this.src = src;
-	}
-
-	public Ruta getRuta() {
-		return ruta;
-	}
-
-	public void setRuta(Ruta ruta) {
-		this.ruta = ruta;
-	}
-
-	@Override
-	public String toString() {
-		return "Foto [id=" + id + ", src=" + src + ", rutas=" + ruta + "]";
-	}
-	
-	
-
 }

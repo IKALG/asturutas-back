@@ -16,9 +16,15 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name="Rutas")
+@Getter
+@Setter
+@ToString
 public class Ruta {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -90,153 +96,5 @@ public class Ruta {
 		this.movilidad_reducida = movilidad_reducida;
 		this.apto_ninos = apto_ninos;
 		this.apto_perros = apto_perros;
-	}
-
-
-
-	public String getDificultad() {
-		return dificultad;
-	}
-
-
-	public void setDificultad(String dificultad) {
-		this.dificultad = dificultad;
-	}
-
-
-	public float getDuracion() {
-		return duracion;
-	}
-
-
-	public void setDuracion(float duracion) {
-		this.duracion = duracion;
-	}
-
-
-	public boolean isMovilidad_reducida() {
-		return movilidad_reducida;
-	}
-
-
-	public void setMovilidad_reducida(boolean movilidad_reducida) {
-		this.movilidad_reducida = movilidad_reducida;
-	}
-
-
-	public boolean isApto_ninos() {
-		return apto_ninos;
-	}
-
-
-	public void setApto_ninos(boolean apto_ninos) {
-		this.apto_ninos = apto_ninos;
-	}
-
-
-	public boolean isApto_perros() {
-		return apto_perros;
-	}
-
-
-	public void setApto_perros(boolean apto_perros) {
-		this.apto_perros = apto_perros;
-	}
-
-
-	public Long getId() {
-		return id;
-	}
-
-
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-
-
-	public String getNombre() {
-		return nombre;
-	}
-
-
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-
-
-	public float getDistancia() {
-		return distancia;
-	}
-
-
-
-	public void setDistancia(float distancia) {
-		this.distancia = distancia;
-	}
-
-
-	public List<Foto> getFotos() {
-		return fotos;
-	}
-
-
-	public void setFotos(List<Foto> fotos) {
-		this.fotos = fotos;
-	}
-
-
-	public Set<Municipio> getMunicipios() {
-		return municipios;
-	}
-
-	public void setMunicipios(Set<Municipio> municipios) {
-		this.municipios = municipios;
-	}
-
-	public String getUsuario() {
-		return usuario;
-	}
-
-
-
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
-	}
-
-
-	public Set<Actividad> getActividades() {
-		return actividades;
-	}
-
-
-	public void setActividades(Set<Actividad> actividades) {
-		this.actividades = actividades;
-	}
-
-
-	@Override
-	public String toString() {
-		return "Ruta [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", distancia=" + distancia
-				+ ", dificultad=" + dificultad + ", duracion=" + duracion + ", fotos=" + fotos + ", actividades="
-				+ actividades + ", usuario=" + usuario + ", municipios=" + municipios + ", movilidad_reducida="
-				+ movilidad_reducida + ", apto_ninos=" + apto_ninos + ", apto_perros=" + apto_perros + "]";
-	}
-
-	
+	}	
 }
