@@ -34,7 +34,7 @@ public class RutaController {
     public String guardarRuta(@ModelAttribute Ruta ruta) {
 //		System.out.println(ruta);
         // Simplemente llamamos al método del servicio para guardar la ruta
-        rutaService.guardarRuta(ruta);
+        rutaService.guardarRutaConFotos(ruta, ruta.getFotos());
         // Redireccionar a alguna vista después de guardar la ruta
         return "redirect:/rutas"; // Cambia "rutaGuardada" por la URL de la vista que deseas mostrar después de guardar la ruta
     }

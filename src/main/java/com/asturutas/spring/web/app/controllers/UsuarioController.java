@@ -8,8 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
 import com.asturutas.spring.web.app.models.Usuario;
-import com.asturutas.spring.web.app.repositories.UsuarioRepository;
 import com.asturutas.spring.web.app.services.UsuarioService;
 
 @Controller
@@ -46,11 +46,13 @@ public class UsuarioController {
 	        model.addAttribute("errorEmail", "El correo electrónico ya está en uso");
 	        return "registrate"; // Retorna a la página de registro para mostrar el error
 	    }
+	    
+	    if (usuarioService.existsByEmail(usuario.getEmail()) && usuarioService.existsByUsername(usuario.getUsuario())) {
+	    	model.addAttribute("errorEmail", "El correo electrónico y el usuario están en uso");
+	    	return "registrate"; // Retorna a la pagina de registro para mostrar el error
+	    }
 	    usuarioService.guardarUsuario(usuario);
-	    return "redirect:/usuarios"; // Redirige a la lista de usuarios si no hay errores
+	    model.addAttribute("registroCorrecto", usuario.getNombre() + ", tu usuario ha sido registrado con éxito");
+	    return "registrate"; // Redirige a la lista de usuarios si no hay errores
 	}
-	
-	
-	
-
 }

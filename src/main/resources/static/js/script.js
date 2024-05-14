@@ -11,6 +11,15 @@ $(document).ready(function(){
             window.location.href = "/registrate";
         });
     }
+    
+    function realizarRegistro() {
+		$("#registro").click(function() {
+			var nombre = $("#nombre").val()
+			alert(nombre + ", tu usuario se ha registrado con éxito.")
+		})
+	}
+	
     redirigirInicio();
     redirigirRegistro();
+    realizarRegistro();
 });

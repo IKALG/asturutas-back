@@ -29,9 +29,11 @@ public class FotoService {
 		return fotoRepository.findAll();
 	}
 	
-	public void guardarFoto(Foto foto) {
-		fotoRepository.save(foto);
+	public void guardarFoto(List<Foto> list) {
+		fotoRepository.saveAll(list);
 	}
+	
+	
 
 	@Override
 	public String toString() {
