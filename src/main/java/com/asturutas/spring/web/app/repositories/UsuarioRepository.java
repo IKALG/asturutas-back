@@ -7,4 +7,6 @@ import com.asturutas.spring.web.app.models.Usuario;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, String> {
+    Usuario findByUsuario(String username);
+    Usuario findByEmail(String email);
 }

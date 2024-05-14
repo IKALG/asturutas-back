@@ -28,5 +28,11 @@
             </tr>
         </tbody>
     </table>
+	<section th:if="${errorUsername}" class="alert alert-danger" role="alert">
+	    <p th:text="${errorUsername}"></p>
+	</section>
+	<section th:if="${errorEmail}" class="alert alert-danger" role="alert">
+	    <p th:text="${errorEmail}"></p>
+	</section>
 </body>
 </html>

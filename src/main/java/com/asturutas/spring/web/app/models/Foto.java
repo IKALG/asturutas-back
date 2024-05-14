@@ -21,8 +21,8 @@ public class Foto {
 	private String src;
 	
 	@ManyToOne
-    @JoinColumn(name = "id_ruta")
-    private Ruta ruta;
+	@JoinColumn(name = "id_ruta")
+	private Ruta ruta;
 
 	public Foto() {
 		super();
@@ -61,7 +61,7 @@ public class Foto {
 
 	@Override
 	public String toString() {
-		return "Foto [id=" + id + ", src=" + src + ", ruta=" + ruta + "]";
+		return "Foto [id=" + id + ", src=" + src + ", rutas=" + ruta + "]";
 	}
 	
 	

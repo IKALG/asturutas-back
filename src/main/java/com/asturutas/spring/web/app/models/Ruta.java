@@ -42,7 +42,7 @@ public class Ruta {
 	private float duracion;
 	
 	@OneToMany(mappedBy = "ruta", fetch = FetchType.EAGER)
-    private List<Foto> fotos = new ArrayList<>();
+	private List<Foto> fotos = new ArrayList<>();
 	
 	@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "actividad_rutas",

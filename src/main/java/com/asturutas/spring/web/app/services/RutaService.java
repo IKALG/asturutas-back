@@ -30,9 +30,4 @@ public class RutaService {
 	public RutaRepository getRutaRepository() {
 		return rutaRepository;
 	}
-	
-	
-	
-	
-
 }
