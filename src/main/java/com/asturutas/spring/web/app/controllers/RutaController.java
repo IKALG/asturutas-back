@@ -8,45 +8,50 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.asturutas.spring.web.app.models.Ruta;
-import com.asturutas.spring.web.app.services.RutaService;
+import com.asturutas.spring.web.app.dto.ruta.RutaRequestDto;
+import com.asturutas.spring.web.app.dto.ruta.RutaResponseDto;
+import com.asturutas.spring.web.app.service.RutaService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(name = "Rutas", description = "Api de rutas")
 @Controller
+@RequestMapping("/rutas")
 public class RutaController {
 
 	@Autowired
-	private final RutaService rutaService;
-	
-	public RutaController(RutaService rutaService) {
-		this.rutaService = rutaService;
+	private RutaService rutaService;
+
+	@GetMapping("/")
+	public String findAll(Model model) {
+		List<RutaResponseDto> rutas = rutaService.findAll();
+		model.addAttribute("rutas", rutas);
+		return "lista-rutas";
 	}
-	
-	
+
 	@GetMapping("/crearRuta")
 	public String anadirRuta(Model model) {
-        model.addAttribute("ruta", new Ruta()); // Añade una nueva instancia de Ruta al modelo
-        return "añadir-ruta"; // Retorna el nombre de la vista que contiene el formulario
-    }
-	
+		model.addAttribute("ruta", new RutaRequestDto()); // Añade una nueva instancia de Ruta al modelo
+		return "añadir-ruta"; // Retorna el nombre de la vista que contiene el formulario
+	}
+
 	@PostMapping("/guardarRuta")
-    public String guardarRuta(@ModelAttribute Ruta ruta) {
-//		System.out.println(ruta);
-        // Simplemente llamamos al método del servicio para guardar la ruta
-        rutaService.guardarRutaConFotos(ruta, ruta.getFotos());
-        // Redireccionar a alguna vista después de guardar la ruta
-        return "redirect:/rutas"; // Cambia "rutaGuardada" por la URL de la vista que deseas mostrar después de guardar la ruta
-    }
-	
+	public String guardarRuta(@ModelAttribute RutaRequestDto rutaRequestDto) {
+		rutaService.create(rutaRequestDto);
+		return "redirect:/rutas"; // Cambia "rutas" por la URL de la vista que deseas mostrar después de guardar
+									// la ruta
+	}
+
 	@GetMapping("/rutas")
 	public ModelAndView rutas() {
 		ModelAndView model = new ModelAndView();
-		List<Ruta> rutas = rutaService.obtenerTodasLasRutas();
+		List<RutaResponseDto> rutas = rutaService.findAll();
 		model.setViewName("lista-rutas");
-		model.addObject("rutas",rutas);
+		model.addObject("rutas", rutas);
 		return model;
 	}
 
-	
 }

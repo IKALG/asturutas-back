@@ -7,7 +7,7 @@
 </head>
 <body>
     <h2>Agregar Ruta</h2>
-    <form action="/guardarRuta" method="post">
+    <form action="/guardarRuta" method="post" enctype="multipart/form-data">
 		<!-- enctype="multipart/form-data" -->
         <label for="nombre">Nombre:</label><br>
         <input type="text" id="nombre" name="nombre" required><br>
@@ -31,7 +31,7 @@
         <input type="checkbox" id="apto_ninos" name="apto_ninos"><br>
         <label for="apto_perros">Apto para Perros:</label>
         <input type="checkbox" id="apto_perros" name="apto_perros"><br>
-        <h3>Actividades</h3>
+        <!-- <h3>Actividades</h3>
         <select id="actividades" name="actividades" multiple required>
             <option value="Senderismo">Senderismo</option>
             <option value="Ciclismo">Ciclismo</option>
@@ -119,7 +119,7 @@
 			<option value="Villayón">Villayón</option>
 			<option value="Yernes y Tameza">Yernes y Tameza</option>
         </select><br><br>
-		<input type="file" id="fotos" name="fotos" multiple>
+		<input type="file" id="fotos" name="fotos" multiple> -->
         <br>
         <button type="submit">Guardar</button>
     </form>
