@@ -1,6 +1,7 @@
 package com.asturutas.spring.web.app.entity;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,7 +9,9 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -41,17 +44,32 @@ public class RutaEntity {
 	@Column(name = "duracion")
 	private float duracion;
 
-	private String fotos;
+	private String fotouno;
+	
+	private String fotodos;
+	
+	private String fototres;
+	
+	private String fotocuatro;
+	
+	private String fotocinco;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "rutas")
-	private List<ActividadRutaEntity> actividades;
+
+	@ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "actividad_rutas",
+               joinColumns = @JoinColumn(name = "id_ruta"),
+               inverseJoinColumns = @JoinColumn(name = "nombre_actividad"))
+    private Set<ActividadEntity> actividades = new HashSet<>();
 
 	@Column(name = "usuario_usuario")
 	private String usuario;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "rutas")
-	private List<MunicipioRutaEntity> municipios;
-
+	@ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "municipios_rutas",
+               joinColumns = @JoinColumn(name = "id_ruta"),
+               inverseJoinColumns = @JoinColumn(name = "nombre_municipio"))
+    private Set<MunicipioEntity> municipios = new HashSet<>();
+	
 	@Column(name = "movilidad_reducida")
 	private boolean movilidadReducida;
 

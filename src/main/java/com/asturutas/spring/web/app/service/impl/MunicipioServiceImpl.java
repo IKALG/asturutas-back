@@ -38,11 +38,10 @@ public class MunicipioServiceImpl implements MunicipioService {
 		}
 	}
 
-	public MunicipioResponseDto findById(String municipio) {
-		Optional<MunicipioEntity> optionalMunicipioEntity = municipioRepository.findById(municipio);
+	public MunicipioResponseDto findByNombre(String municipio) {
+		Optional<MunicipioEntity> optionalMunicipioEntity = municipioRepository.findByNombre(municipio);
 		if (optionalMunicipioEntity.isPresent()) {
-			MunicipioResponseDto municipioResponseDto = municipioMapper
-					.entityToMunicipioResponseDto(optionalMunicipioEntity.get());
+			MunicipioResponseDto municipioResponseDto = municipioMapper.entityToMunicipioResponseDto(optionalMunicipioEntity.get());
 			return municipioResponseDto;
 		} else {
 			throw new IllegalArgumentException("No existe una municipio con el id: " + municipio);
@@ -50,6 +49,7 @@ public class MunicipioServiceImpl implements MunicipioService {
 	}
 
 	public MunicipioResponseDto create(MunicipioRequestDto municipioRequestDto) {
+		System.out.println(municipioRequestDto);
 		MunicipioEntity municipioEntity = municipioMapper.requestDtoToEntity(municipioRequestDto);
 		municipioRepository.save(municipioEntity);
 		MunicipioResponseDto municipioResponseDto = municipioMapper.entityToMunicipioResponseDto(municipioEntity);
@@ -64,7 +64,7 @@ public class MunicipioServiceImpl implements MunicipioService {
 	}
 
 	public MunicipioResponseDto delete(String municipio) {
-		MunicipioResponseDto municipioResponseDto = this.findById(municipio);
+		MunicipioResponseDto municipioResponseDto = this.findByNombre(municipio);
 		MunicipioEntity municipioEntity = municipioMapper.responseDtoToEntity(municipio, municipioResponseDto);
 		municipioRepository.delete(municipioEntity);
 		return municipioResponseDto;

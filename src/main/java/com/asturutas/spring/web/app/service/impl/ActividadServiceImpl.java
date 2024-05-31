@@ -38,11 +38,10 @@ public class ActividadServiceImpl implements ActividadService {
 		}
 	}
 
-	public ActividadResponseDto findById(String actividad) {
-		Optional<ActividadEntity> optionalActividadEntity = actividadRepository.findById(actividad);
+	public ActividadResponseDto findByNombre(String actividad) {
+		Optional<ActividadEntity> optionalActividadEntity = actividadRepository.findByNombre(actividad);
 		if (optionalActividadEntity.isPresent()) {
-			ActividadResponseDto actividadResponseDto = actividadMapper
-					.entityToActividadResponseDto(optionalActividadEntity.get());
+			ActividadResponseDto actividadResponseDto = actividadMapper.entityToActividadResponseDto(optionalActividadEntity.get());
 			return actividadResponseDto;
 		} else {
 			throw new IllegalArgumentException("No existe una actividad con el id: " + actividad);
@@ -64,7 +63,7 @@ public class ActividadServiceImpl implements ActividadService {
 	}
 
 	public ActividadResponseDto delete(String actividad) {
-		ActividadResponseDto actividadResponseDto = this.findById(actividad);
+		ActividadResponseDto actividadResponseDto = this.findByNombre(actividad);
 		ActividadEntity actividadEntity = actividadMapper.responseDtoToEntity(actividad, actividadResponseDto);
 		actividadRepository.delete(actividadEntity);
 		return actividadResponseDto;

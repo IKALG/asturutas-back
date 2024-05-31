@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +7,18 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="shortcut icon" type="image/png" href="/imagenes/logo.png">
     <title>Lista de Rutas</title>
+    <style>
+        .ruta-container {
+            max-height: 1000px; /* Altura máxima del contenedor */
+            overflow: auto; /* Agregar barras de desplazamiento si es necesario */
+        }
+        .ruta-info {
+            margin-bottom: 1rem; /* Espacio entre cada información de la ruta */
+        }
+        .ruta-info span {
+            margin-right: 1rem; /* Espacio entre cada elemento dentro de la información de la ruta */
+        }
+    </style>
 </head>
 
 <body class="bg-dark">
@@ -15,72 +26,85 @@
         <!-- Contenido del header -->
     </header>
 
-    <section class="container-fluid mt-2">
-        <section class="row justify-content-center align-items-center">
-            <section class="col">
-                <h1 class="text-center text-white">Lista de Rutas</h1>
-                <div class="table-responsive">
-                    <table class="table table-dark table-striped">
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Descripción</th>
-                                <th>Distancia</th>
-                                <th>Dificultad</th>
-                                <th>Duración</th>
-                                <th>Usuario</th>
-                                <th>Movilidad Reducida</th>
-                                <th>Apto para Niños</th>
-                                <th>Apto para Perros</th>
-                                <th>Municipios</th>
-                                <th>Actividades</th>
-                                <th>Fotos</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="ruta : ${rutas}">
-                                <td th:text="${ruta.nombre}">Nombre de la Ruta</td>
-                                <td th:text="${ruta.descripcion}">Descripción de la Ruta</td>
-                                <td th:text="${ruta.distancia}">Distancia</td>
-                                <td th:text="${ruta.dificultad}">Dificultad</td>
-                                <td th:text="${ruta.duracion}">Duración</td>
-                                <td th:text="${ruta.usuario}">Usuario</td>
-                                <td th:text="${ruta.movilidadReducida} ? 'Sí' : 'No'">Movilidad Reducida</td>
-                                <td th:text="${ruta.aptoNinos} ? 'Sí' : 'No'">Apto para Niños</td>
-                                <td th:text="${ruta.aptoPerros} ? 'Sí' : 'No'">Apto para Perros</td>
-                                <td>
-                                    <ul>
-                                        <li th:each="municipio : ${ruta.municipios}" th:text="${municipio.municipios.nombre}">Nombre Municipio</li>
-                                    </ul>
-                                </td>
-                                <td>
-                                    <ul>
-                                        <li th:each="actividad : ${ruta.actividades}" th:text="${actividad.actividades.nombre}">Nombre Actividad</li>
-                                    </ul>
-                                </td>
-                                <td>
-                                    <img th:src="@{${ruta.fotos}}" alt="Foto de la Ruta" width="100">
-                                </td>
-                                <td>
-                                    <a th:href="@{/ruta/{id}(id=${ruta.id})}" class="btn btn-primary">Ver</a>
-                                    <a th:href="@{/ruta/editar/{id}(id=${ruta.id})}" class="btn btn-warning">Editar</a>
-                                    <a th:href="@{/ruta/eliminar/{id}(id=${ruta.id})}" class="btn btn-danger">Eliminar</a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-        </section>
-    </section>
+	<section class="container mt-4">
+	        <section class="row justify-content-center">
+	            <section class="col">
+	                <h1 class="text-center text-white">Lista de Rutas</h1>
+	                <div class="table-responsive">
+	                    <div th:each="ruta : ${rutas}" class="mb-4 p-3 bg-secondary rounded ruta-container">
+	                        <h2 class="text-white fw-bold" th:text="${ruta.nombre}">Nombre de la Ruta</h2>
+	                        <p class="text-white" th:text="${ruta.descripcion}">Descripción de la Ruta</p>
+	                        <div class="d-flex">
+								<div id="carousel${ruta.id}" class="carousel slide mb-3 me-3" data-bs-ride="carousel" style="width: 433px;">
+								        <div class="carousel-inner">
+								            <div th:if="${ruta.fotouno}" class="carousel-item active">
+								                <img th:if="${ruta.fotouno != null and ruta.fotouno != ''}" th:src="@{'/imagenes/' + ${ruta.fotouno}}" class="d-block w-100" alt="Foto de la Ruta">
+								            </div>
+								            <div th:if="${ruta.fotodos}" class="carousel-item">
+								                <img th:if="${ruta.fotodos != null and ruta.fotodos != ''}" th:src="@{'/imagenes/' + ${ruta.fotodos}}" class="d-block w-100" alt="Foto de la Ruta">
+								            </div>
+								            <div th:if="${ruta.fototres}" class="carousel-item">
+								                <img th:if="${ruta.fototres != null and ruta.fototres != ''}" th:src="@{'/imagenes/' + ${ruta.fototres}}" class="d-block w-100" alt="Foto de la Ruta">
+								            </div>
+								            <div th:if="${ruta.fotocuatro}" class="carousel-item">
+								                <img th:if="${ruta.fotocuatro != null and ruta.fotocuatro != ''}" th:src="@{'/imagenes/' + ${ruta.fotocuatro}}" class="d-block w-100" alt="Foto de la Ruta">
+								            </div>
+								            <div th:if="${ruta.fotocinco}" class="carousel-item">
+								                <img th:if="${ruta.fotocinco != null and ruta.fotocinco != ''}" th:src="@{'/imagenes/' + ${ruta.fotocinco}}" class="d-block w-100" alt="Foto de la Ruta">
+								            </div>
+								        </div>
+								        <button class="carousel-control-prev" type="button" data-bs-target="#carousel${ruta.id}" data-bs-slide="prev">
+								            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								            <span class="visually-hidden">Previous</span>
+								        </button>
+								        <button class="carousel-control-next" type="button" data-bs-target="#carousel${ruta.id}" data-bs-slide="next">
+								            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+								            <span class="visually-hidden">Next</span>
+								        </button>
+								    </div>
 
-    <footer class="mt-2">
+	                            <div class="ruta-info">
+	                                <span><strong>Distancia:</strong> <span th:text="${ruta.distancia} + ' km'">Distancia</span></span>
+	                                <span><strong>Duración:</strong> <span th:text="${ruta.duracion} + ' h'">Duración</span></span>
+	                                <span><strong>Dificultad:</strong> <span th:text="${ruta.dificultad}">Dificultad</span></span>
+	                                <br>
+	                                <span><strong>Movilidad Reducida:</strong> <span th:text="${ruta.movilidadReducida} ? 'Sí' : 'No'">Movilidad Reducida</span></span>
+	                                <span><strong>Apto para Niños:</strong> <span th:text="${ruta.aptoNinos} ? 'Sí' : 'No'">Apto para Niños</span></span>
+	                                <span><strong>Apto para Perros:</strong> <span th:text="${ruta.aptoPerros} ? 'Sí' : 'No'">Apto para Perros</span></span>
+	                                <br>
+									<strong>Municipios:</strong>
+									<span th:each="municipio, iterStat : ${ruta.municipios}">
+									    <span th:text="${municipio.nombre}"></span>
+									    <span th:if="${!iterStat.last}">-</span>
+									</span>
+									<br>
+									<strong>Actividades:</strong>
+									<span th:each="actividad, iterStat : ${ruta.actividades}">
+									    <span th:text="${actividad.nombre}"></span>
+									    <span th:if="${!iterStat.last}">-</span>
+									</span>
+									</div>
+	                        </div>
+	                        <div class="ruta-info">
+	                            <strong>Usuario:</strong> <span th:text="${ruta.usuario}">Usuario</span>
+	                        </div>
+	                        <div>
+	                            <a th:href="@{/ruta/{id}(id=${ruta.id})}" class="btn btn-primary btn-sm mb-1">Ver</a>
+	                            <a th:href="@{/ruta/editar/{id}(id=${ruta.id})}" class="btn btn-warning btn-sm mb-1">Editar</a>
+	                            <a th:href="@{/ruta/eliminar/{id}(id=${ruta.id})}" class="btn btn-danger btn-sm">Eliminar</a>
+	                        </div>
+	                    </div>
+	                </div>
+	            </section>
+	        </section>
+	    </section>
+
+    <footer class="mt-4 text-center text-white">
         <!-- Contenido del footer -->
+        <p>&copy; 2024 Tu Compañía. Todos los derechos reservados.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
-
 </html>

@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.asturutas.spring.web.app.dto.ruta.RutaRequestDto;
 import com.asturutas.spring.web.app.dto.ruta.RutaResponseDto;
+import com.asturutas.spring.web.app.service.ActividadService;
+import com.asturutas.spring.web.app.service.MunicipioService;
 import com.asturutas.spring.web.app.service.RutaService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -24,6 +25,12 @@ public class RutaController {
 
 	@Autowired
 	private RutaService rutaService;
+	
+	@Autowired
+	private MunicipioService municipioService;
+	
+	@Autowired
+	private ActividadService actividadService;
 
 	@GetMapping("/")
 	public String findAll(Model model) {
@@ -32,26 +39,29 @@ public class RutaController {
 		return "lista-rutas";
 	}
 
-	@GetMapping("/crearRuta")
-	public String anadirRuta(Model model) {
-		model.addAttribute("ruta", new RutaRequestDto()); // Añade una nueva instancia de Ruta al modelo
-		return "añadir-ruta"; // Retorna el nombre de la vista que contiene el formulario
-	}
 
-	@PostMapping("/guardarRuta")
-	public String guardarRuta(@ModelAttribute RutaRequestDto rutaRequestDto) {
-		rutaService.create(rutaRequestDto);
-		return "redirect:/rutas"; // Cambia "rutas" por la URL de la vista que deseas mostrar después de guardar
-									// la ruta
+    @GetMapping("/crear")
+    public String create(Model model) {
+        model.addAttribute("rutaRequestDto", new RutaRequestDto());
+        model.addAttribute("actividades", actividadService.findAll());
+        model.addAttribute("municipios", municipioService.findAll());
+        return "añadir-ruta";
+    }
+    
+    @PostMapping("/guardar")
+	public String save(@ModelAttribute RutaRequestDto rutaRequestDto) {
+	    rutaService.create(rutaRequestDto);
+	    return "redirect:/rutas/"; // Redirige a la lista de usuarios si no hay errores
 	}
-
-	@GetMapping("/rutas")
-	public ModelAndView rutas() {
-		ModelAndView model = new ModelAndView();
-		List<RutaResponseDto> rutas = rutaService.findAll();
-		model.setViewName("lista-rutas");
-		model.addObject("rutas", rutas);
-		return model;
-	}
+    
+    
+//	@GetMapping("/rutas")
+//	public ModelAndView rutas() {
+//		ModelAndView model = new ModelAndView();
+//		List<RutaResponseDto> rutas = rutaService.findAll();
+//		model.setViewName("lista-rutas");
+//		model.addObject("rutas", rutas);
+//		return model;
+//	}
 
 }

@@ -1,9 +1,9 @@
 package com.asturutas.spring.web.app.dto.ruta;
 
-import java.util.List;
+import java.util.Set;
 
-import com.asturutas.spring.web.app.dto.actividadRuta.ActividadRutaResponseDto;
-import com.asturutas.spring.web.app.dto.municipioRuta.MunicipioRutaResponseDto;
+import com.asturutas.spring.web.app.dto.actividad.ActividadRequestDto;
+import com.asturutas.spring.web.app.dto.municipio.MunicipioRequestDto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,13 +25,21 @@ public class RutaRequestDto {
 
 	private float duracion;
 
-	private String fotos;
-
-	private List<ActividadRutaResponseDto> actividades;
+	private String fotouno;
+	
+	private String fotodos;
+	
+	private String fototres;
+	
+	private String fotocuatro;
+	
+	private String fotocinco;
+	
+	private Set<MunicipioRequestDto> municipios;
 
 	private String usuario;
 
-	private List<MunicipioRutaResponseDto> municipios;
+	private Set<ActividadRequestDto> actividades;
 
 	private boolean movilidadReducida;
 

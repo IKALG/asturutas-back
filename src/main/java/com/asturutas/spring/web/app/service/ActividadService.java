@@ -9,7 +9,7 @@ public interface ActividadService {
 
 	List<ActividadResponseDto> findAll();
 
-	ActividadResponseDto findById(String actividad);
+	ActividadResponseDto findByNombre(String actividad);
 
 	ActividadResponseDto create(ActividadRequestDto actividadRequestDto);
 

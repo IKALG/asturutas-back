@@ -1,12 +1,13 @@
 package com.asturutas.spring.web.app.entity;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,6 +24,6 @@ public class MunicipioEntity {
 	@Column(name = "nombre")
 	private String nombre;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "municipios")
-	private List<MunicipioRutaEntity> municipios;
+	@ManyToMany(mappedBy = "municipios", fetch = FetchType.EAGER)
+    private Set<RutaEntity> rutas = new HashSet<>();
 }

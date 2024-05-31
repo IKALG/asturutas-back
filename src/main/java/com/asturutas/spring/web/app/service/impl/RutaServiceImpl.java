@@ -12,6 +12,8 @@ import com.asturutas.spring.web.app.dto.ruta.RutaResponseDto;
 import com.asturutas.spring.web.app.entity.RutaEntity;
 import com.asturutas.spring.web.app.mapper.RutaMapper;
 import com.asturutas.spring.web.app.repository.RutaRepository;
+import com.asturutas.spring.web.app.service.ActividadService;
+import com.asturutas.spring.web.app.service.MunicipioService;
 import com.asturutas.spring.web.app.service.RutaService;
 
 @Service
@@ -22,6 +24,12 @@ public class RutaServiceImpl implements RutaService {
 
 	@Autowired
 	private RutaMapper rutaMapper;
+	
+	@Autowired
+	private ActividadService actividadService;
+	
+	@Autowired
+	private MunicipioService municipioService;
 
 	public List<RutaResponseDto> findAll() {
 		List<RutaEntity> rutaEntityList = rutaRepository.findAll();

@@ -9,7 +9,7 @@ public interface MunicipioService {
 
 	List<MunicipioResponseDto> findAll();
 
-	MunicipioResponseDto findById(String municipio);
+	MunicipioResponseDto findByNombre(String municipio);
 
 	MunicipioResponseDto create(MunicipioRequestDto municipioRequestDto);
 
