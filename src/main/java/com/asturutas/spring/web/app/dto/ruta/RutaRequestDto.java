@@ -40,7 +40,7 @@ public class RutaRequestDto {
 	private String usuario;
 
 	private Set<ActividadRequestDto> actividades;
-
+	
 	private boolean movilidadReducida;
 
 	private boolean aptoNinos;

@@ -37,9 +37,9 @@
 	                        <div class="d-flex">
 								<div id="carousel${ruta.id}" class="carousel slide mb-3 me-3" data-bs-ride="carousel" style="width: 433px;">
 								        <div class="carousel-inner">
-								            <div th:if="${ruta.fotouno}" class="carousel-item active">
-								                <img th:if="${ruta.fotouno != null and ruta.fotouno != ''}" th:src="@{'/imagenes/' + ${ruta.fotouno}}" class="d-block w-100" alt="Foto de la Ruta">
-								            </div>
+											<div th:if="${ruta.fotouno}" class="carousel-item active">
+											                                        <img th:if="${ruta.fotouno != null and ruta.fotouno != ''}" th:src="@{'/imagenes/' + ${ruta.fotouno}}" class="d-block w-100" alt="Foto de la Ruta">
+											                                    </div>
 								            <div th:if="${ruta.fotodos}" class="carousel-item">
 								                <img th:if="${ruta.fotodos != null and ruta.fotodos != ''}" th:src="@{'/imagenes/' + ${ruta.fotodos}}" class="d-block w-100" alt="Foto de la Ruta">
 								            </div>

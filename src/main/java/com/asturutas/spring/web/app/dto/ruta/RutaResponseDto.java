@@ -42,7 +42,7 @@ public class RutaResponseDto {
 	private String usuario;
 
 	private Set<MunicipioRequestDto> municipios;
-
+	
 	private boolean movilidadReducida;
 
 	private boolean aptoNinos;
