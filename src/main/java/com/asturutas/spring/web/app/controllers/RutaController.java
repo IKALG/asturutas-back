@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import com.asturutas.spring.web.app.dto.ruta.RutaRequestDto;
 import com.asturutas.spring.web.app.dto.ruta.RutaResponseDto;
@@ -51,8 +51,23 @@ public class RutaController {
     @PostMapping("/rutas/guardar")
 	public String save(@ModelAttribute RutaRequestDto rutaRequestDto) {
 	    rutaService.create(rutaRequestDto);
-	    return "redirect:/rutas/"; // Redirige a la lista de usuarios si no hay errores
+	    return "redirect:/"; // Redirige a la lista de usuarios si no hay errores
 	}
+    
+    @GetMapping("rutas/editar/{id}")
+    public String edit(Model model, @PathVariable Integer id) {
+        RutaResponseDto rutaResponseDto = rutaService.findById(id);
+        model.addAttribute("ruta", rutaResponseDto);
+        model.addAttribute("actividades", actividadService.findAll());
+        model.addAttribute("municipios", municipioService.findAll());
+    	return "ruta-editar";
+    }
+    
+    @PostMapping("rutas/actualizar/{id}")
+    public String update(@PathVariable Integer id, @ModelAttribute RutaRequestDto rutaRequestDto) {
+    	rutaService.update(id, rutaRequestDto);
+    	return "redirect:/";
+    }
     
     @GetMapping("/rutas/{id}")
     public String findById(Model model, @PathVariable Integer id) {
@@ -61,7 +76,7 @@ public class RutaController {
     	return "ruta-individual";
     }
     
-    
+   
 //	@GetMapping("/rutas")
 //	public ModelAndView rutas() {
 //		ModelAndView model = new ModelAndView();
