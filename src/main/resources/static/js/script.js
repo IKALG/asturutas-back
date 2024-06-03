@@ -2,13 +2,13 @@ $(document).ready(function(){
 
     function redirigirInicio() {
         $("#login").click(function(){
-            window.location.href = "/usuarios";
+            window.location.href = "/usuarios/iniciar";
         });
     }
 
     function redirigirRegistro() {
         $("#register").click(function(){
-            window.location.href = "/registrate";
+            window.location.href = "/usuarios/registrar";
         });
     }
     

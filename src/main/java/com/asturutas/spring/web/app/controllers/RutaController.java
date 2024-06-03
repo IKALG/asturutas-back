@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -20,7 +21,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name = "Rutas", description = "Api de rutas")
 @Controller
-@RequestMapping("/rutas")
 public class RutaController {
 
 	@Autowired
@@ -36,11 +36,11 @@ public class RutaController {
 	public String findAll(Model model) {
 		List<RutaResponseDto> rutas = rutaService.findAll();
 		model.addAttribute("rutas", rutas);
-		return "lista-rutas";
+		return "index";
 	}
 
 
-    @GetMapping("/crear")
+    @GetMapping("/rutas/crear")
     public String create(Model model) {
         model.addAttribute("rutaRequestDto", new RutaRequestDto());
         model.addAttribute("actividades", actividadService.findAll());
@@ -48,11 +48,18 @@ public class RutaController {
         return "añadir-ruta";
     }
     
-    @PostMapping("/guardar")
+    @PostMapping("/rutas/guardar")
 	public String save(@ModelAttribute RutaRequestDto rutaRequestDto) {
 	    rutaService.create(rutaRequestDto);
 	    return "redirect:/rutas/"; // Redirige a la lista de usuarios si no hay errores
 	}
+    
+    @GetMapping("/rutas/{id}")
+    public String findById(Model model, @PathVariable Integer id) {
+    	RutaResponseDto rutaResponseDto = rutaService.findById(id);
+    	model.addAttribute("ruta", rutaResponseDto);
+    	return "ruta-individual";
+    }
     
     
 //	@GetMapping("/rutas")

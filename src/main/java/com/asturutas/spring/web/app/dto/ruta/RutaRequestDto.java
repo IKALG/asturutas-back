@@ -14,6 +14,8 @@ import lombok.ToString;
 @ToString
 
 public class RutaRequestDto {
+	
+	private Integer id;
 
 	private String nombre;
 

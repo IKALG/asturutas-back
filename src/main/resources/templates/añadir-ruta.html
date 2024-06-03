@@ -7,6 +7,19 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="shortcut icon" type="image/png" href="/imagenes/logo.png">
     <title>Agregar Ruta</title>
+    <style>
+        .form-container {
+            background-color: #343a40;
+            padding: 2rem;
+            border-radius: .25rem;
+        }
+        .form-label {
+            margin-bottom: .5rem;
+        }
+        .form-check-label {
+            margin-left: .3rem;
+        }
+    </style>
 </head>
 <body class="bg-dark">
     <header class="p-3 text-bg-primary mt-2">
@@ -16,8 +29,8 @@
     <section class="container mt-4">
         <section class="row justify-content-center">
             <section class="col-lg-6">
-                <h1 class="text-center text-white">Agregar Ruta</h1>
-                <form action="/rutas/guardar" method="post" th:object="${rutaRequestDto}" class="p-4 bg-secondary rounded">
+                <h1 class="text-center text-white mb-4">Agregar Ruta</h1>
+                <form action="/rutas/guardar" method="post" th:object="${rutaRequestDto}" class="form-container">
                     <div class="mb-3">
                         <label for="nombre" class="form-label text-white">Nombre:</label>
                         <input type="text" id="nombre" name="nombre" class="form-control" th:field="*{nombre}" required>
@@ -47,12 +60,19 @@
                         <input type="number" step="any" id="duracion" name="duracion" class="form-control" th:field="*{duracion}" required>
                     </div>
                     <div class="mb-3">
-                        <label for="fotos" class="form-label text-white">Fotos:</label>
-                        <input type="file" id="fotos" name="fotos" class="form-control" th:field="*{fotouno}">
-						<input type="file" id="fotos" name="fotos" class="form-control" th:field="*{fotodos}">
-						<input type="file" id="fotos" name="fotos" class="form-control" th:field="*{fototres}">
-						<input type="file" id="fotos" name="fotos" class="form-control" th:field="*{fotocuatro}">
-						<input type="file" id="fotos" name="fotos" class="form-control" th:field="*{fotocinco}">
+                        <input type="file" id="fotouno" name="fotouno" class="form-control" th:field="*{fotouno}">
+                    </div>
+                    <div class="mb-3">
+                        <input type="file" id="fotodos" name="fotodos" class="form-control" th:field="*{fotodos}">
+                    </div>
+                    <div class="mb-3">
+                        <input type="file" id="fototres" name="fototres" class="form-control" th:field="*{fototres}">
+                    </div>
+                    <div class="mb-3">
+                        <input type="file" id="fotocuatro" name="fotocuatro" class="form-control" th:field="*{fotocuatro}">
+                    </div>
+                    <div class="mb-3">
+                        <input type="file" id="fotocinco" name="fotocinco" class="form-control" th:field="*{fotocinco}">
                     </div>
                     <div class="mb-3">
                         <label class="form-label text-white">Actividades:</label>

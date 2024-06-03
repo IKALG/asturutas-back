@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -11,6 +11,40 @@
   <script src="/js/jquery-3.7.1.js"></script>
   <script src="/js/script.js"></script>
   <title>asturutas</title>
+  <style>
+      .ruta-container {
+          max-height: 500px;
+          overflow: auto;
+          background-color: #343a40;
+          padding: 1rem;
+          border-radius: .25rem;
+          margin-bottom: 1.5rem;
+      }
+      .ruta-info {
+          margin-bottom: 1rem;
+      }
+      .ruta-info span {
+          margin-right: 1rem;
+      }
+      .carousel-item img {
+          object-fit: cover;
+      }
+      .ruta-heading {
+          margin-bottom: 1rem;
+      }
+      .btn-custom {
+          background-color: #6c757d;
+          border: none;
+          color: white;
+      }
+      .btn-custom:hover {
+          background-color: #5a6268;
+      }
+      .btn-custom:focus, .btn-custom:active {
+          background-color: #5a6268;
+          box-shadow: none;
+      }
+  </style>
 </head>
 
 <body class="bg-dark">
@@ -74,6 +108,79 @@
       </section>
     </section>
   </section>
+  
+  <section class="container mt-4 mb-4">
+          <section class="row justify-content-center">
+              <section class="col-12 col-md-10">
+                  <div class="table-responsive">
+                      <div th:each="ruta : ${rutas}" class="ruta-container">
+                          <h2 class="text-white fw-bold ruta-heading" th:text="${ruta.nombre}">Nombre de la Ruta</h2>
+                          <div class="d-flex">
+                              <div id="carousel${ruta.id}" class="carousel slide mb-3 me-3" data-bs-ride="carousel" style="width: 350px;">
+                                  <div class="carousel-inner">
+                                      <div th:if="${ruta.fotouno}" class="carousel-item active">
+                                          <img th:src="@{'/imagenes/' + ${ruta.fotouno}}" class="d-block w-100" alt="Foto de la Ruta">
+                                      </div>
+                                      <div th:if="${ruta.fotodos}" class="carousel-item">
+                                          <img th:src="@{'/imagenes/' + ${ruta.fotodos}}" class="d-block w-100" alt="Foto de la Ruta">
+                                      </div>
+                                      <div th:if="${ruta.fototres}" class="carousel-item">
+                                          <img th:src="@{'/imagenes/' + ${ruta.fototres}}" class="d-block w-100" alt="Foto de la Ruta">
+                                      </div>
+                                      <div th:if="${ruta.fotocuatro}" class="carousel-item">
+                                          <img th:src="@{'/imagenes/' + ${ruta.fotocuatro}}" class="d-block w-100" alt="Foto de la Ruta">
+                                      </div>
+                                      <div th:if="${ruta.fotocinco}" class="carousel-item">
+                                          <img th:src="@{'/imagenes/' + ${ruta.fotocinco}}" class="d-block w-100" alt="Foto de la Ruta">
+                                      </div>
+                                  </div>
+                                  <button class="carousel-control-prev" type="button" data-bs-target="#carousel${ruta.id}" data-bs-slide="prev">
+                                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                      <span class="visually-hidden">Previous</span>
+                                  </button>
+                                  <button class="carousel-control-next" type="button" data-bs-target="#carousel${ruta.id}" data-bs-slide="next">
+                                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                      <span class="visually-hidden">Next</span>
+                                  </button>
+                              </div>
+  
+                              <div class="ruta-info text-white">
+                                  <span><strong>Distancia:</strong> <span th:text="${ruta.distancia} + ' km'">Distancia</span></span>
+                                  <span><strong>Duración:</strong> <span th:text="${ruta.duracion} + ' h'">Duración</span></span>
+                                  <span><strong>Dificultad:</strong> <span th:text="${ruta.dificultad}">Dificultad</span></span>
+                                  <br>
+                                  <span><strong>Movilidad Reducida:</strong> <span th:text="${ruta.movilidadReducida} ? 'Sí' : 'No'">Movilidad Reducida</span></span>
+                                  <br>
+                                  <span><strong>Apto para Niños:</strong> <span th:text="${ruta.aptoNinos} ? 'Sí' : 'No'">Apto para Niños</span></span>
+                                  <br>
+                                  <span><strong>Apto para Perros:</strong> <span th:text="${ruta.aptoPerros} ? 'Sí' : 'No'">Apto para Perros</span></span>
+                                  <br>
+                                  <strong>Municipios:</strong>
+                                  <span th:each="municipio, iterStat : ${ruta.municipios}">
+                                      <span th:text="${municipio.nombre}"></span>
+                                      <span th:if="${!iterStat.last}">-</span>
+                                  </span>
+                                  <br>
+                                  <strong>Actividades:</strong>
+                                  <span th:each="actividad, iterStat : ${ruta.actividades}">
+                                      <span th:text="${actividad.nombre}"></span>
+                                      <span th:if="${!iterStat.last}">-</span>
+                                  </span>
+                              </div>
+                          </div>
+                          <div class="ruta-info text-primary">
+                              <strong>Usuario:</strong> <span th:text="${ruta.usuario}">Usuario</span>
+                          </div>
+  						<div>
+  						    <a th:href="@{/rutas/{id}(id=${ruta.id})}" class="btn btn-custom btn-sm mb-1">Ver ruta</a>
+  						    <a th:href="@{/ruta/editar/{id}(id=${ruta.id})}" class="btn btn-custom btn-sm mb-1">Editar</a>
+  						    <a th:href="@{/ruta/eliminar/{id}(id=${ruta.id})}" class="btn btn-custom btn-sm">Eliminar</a>
+  						</div>
+                      </div>
+                  </div>
+              </section>
+          </section>
+      </section>
 
   <footer class="mt-2">
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 bg-primary text-warning border-0">

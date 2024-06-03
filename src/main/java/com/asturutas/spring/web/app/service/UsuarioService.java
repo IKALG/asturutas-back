@@ -16,5 +16,9 @@ public interface UsuarioService {
 	UsuarioResponseDto update(String usuario, UsuarioRequestDto usuarioRequestDto);
 
 	UsuarioResponseDto delete(String usuario);
+	
+	UsuarioResponseDto existsByUsername(String usuario);
+	
+	UsuarioResponseDto existsByEmail(String email);
 
 }

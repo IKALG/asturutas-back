@@ -18,11 +18,6 @@ public class WebController {
 
 	// Rutas página web
 
-	@GetMapping("/")
-	public String index() {
-		return "index";
-	}
-
 	@GetMapping("/contacto")
 	public String contacto() {
 		return "contacto";

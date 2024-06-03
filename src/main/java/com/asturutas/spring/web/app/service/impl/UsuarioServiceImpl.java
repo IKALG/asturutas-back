@@ -49,14 +49,14 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	public UsuarioResponseDto create(UsuarioRequestDto usuarioRequestDto) {
-		UsuarioEntity usuarioEntity = usuarioMapper.requestDtoToEntity(usuarioRequestDto);
+		UsuarioEntity usuarioEntity = usuarioMapper.usuarioRequestDtoToEntity(usuarioRequestDto);
 		usuarioRepository.save(usuarioEntity);
 		UsuarioResponseDto usuarioResponseDto = usuarioMapper.entityToUsuarioResponseDto(usuarioEntity);
 		return usuarioResponseDto;
 	}
 
-	public UsuarioResponseDto update(String usuario, UsuarioRequestDto usuarioDto) {
-		UsuarioEntity usuarioEntity = usuarioMapper.requestDtoToEntity(usuario, usuarioDto);
+	public UsuarioResponseDto update(String usuario, UsuarioRequestDto usuarioRequestDto) {
+		UsuarioEntity usuarioEntity = usuarioMapper.usuarioRequestDtoToEntity(usuario, usuarioRequestDto);
 		usuarioRepository.save(usuarioEntity);
 		UsuarioResponseDto usuarioResponseDto = usuarioMapper.entityToUsuarioResponseDto(usuarioEntity);
 		return usuarioResponseDto;
@@ -68,5 +68,23 @@ public class UsuarioServiceImpl implements UsuarioService {
 		usuarioRepository.delete(usuarioEntity);
 		return usuarioResponseDto;
 	}
+
+	@Override
+	public UsuarioResponseDto existsByUsername(String usuario) {
+		Optional<UsuarioEntity> usuarioEntity = usuarioRepository.findByUsuario(usuario);
+		UsuarioResponseDto usuarioResponseDto = usuarioMapper.entityToUsuarioResponseDto(usuarioEntity);
+        return usuarioEntity
+                .map(usuarioMapper::entityToUsuarioResponseDto)
+                .orElse(null);
+	}
+
+	@Override
+	public UsuarioResponseDto existsByEmail(String email) {
+		Optional<UsuarioEntity> usuarioEntity = usuarioRepository.findByEmail(email);
+		UsuarioResponseDto usuarioResponseDto = usuarioMapper.entityToUsuarioResponseDto(usuarioEntity);
+		return usuarioEntity
+                .map(usuarioMapper::entityToUsuarioResponseDto)
+                .orElse(null);
+    }
 
 }
