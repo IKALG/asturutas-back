@@ -89,6 +89,19 @@ public class RutaController {
         return "por-actividad";
     }
     
+    @GetMapping("/rutas/municipio")
+    public String findRutasByMunicipio(Model model) {
+        model.addAttribute("municipios", municipioService.findAll());
+        return "filtrar-por-municipio";
+    }
+
+    @PostMapping("/rutas/municipio/mostrar")
+    public String mostrarRutasByMunicipio(Model model, @RequestParam String municipio) {
+        List<RutaResponseDto> rutaResponseDtoList = rutaService.findRutasByMunicipio(municipio);
+        model.addAttribute("rutasList", rutaResponseDtoList);
+        return "por-municipio";
+    }
+    
    
 //	@GetMapping("/rutas")
 //	public ModelAndView rutas() {

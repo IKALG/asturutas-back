@@ -95,4 +95,19 @@ public class RutaServiceImpl implements RutaService {
 		}
 	}
 
+	@Override
+	public List<RutaResponseDto> findRutasByMunicipio(String municipio) {
+		List <RutaEntity> rutaEntityList = rutaRepository.findRutasByMunicipio(municipio);
+		if(rutaEntityList.isEmpty()) {
+			return new ArrayList<>();
+		} else {
+			List <RutaResponseDto> rutaResponseDtoList = new ArrayList<>();
+			for (RutaEntity rutaEntity : rutaEntityList) {
+				RutaResponseDto rutaResponseDto = rutaMapper.entityToRutaResponseDto(rutaEntity);
+				rutaResponseDtoList.add(rutaResponseDto);
+			}
+			return rutaResponseDtoList;
+		}
+	}
+
 }

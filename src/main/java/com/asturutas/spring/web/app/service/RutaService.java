@@ -18,4 +18,6 @@ public interface RutaService {
 	RutaResponseDto delete(int id);
 	
 	List <RutaResponseDto> findRutasByActividad (String actividad);
+	
+	List <RutaResponseDto> findRutasByMunicipio (String municipio);
 }
