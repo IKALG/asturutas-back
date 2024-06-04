@@ -38,11 +38,6 @@ public class WebController {
 		return "para-ninos";
 	}
 
-	@GetMapping("/por-actividad")
-	public String porActividad() {
-		return "por-actividad";
-	}
-
 	@GetMapping("/por-municipio")
 	public String porMunicipio() {
 		return "por-municipio";

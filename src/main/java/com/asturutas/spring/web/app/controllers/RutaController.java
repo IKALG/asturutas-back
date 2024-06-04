@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.asturutas.spring.web.app.dto.ruta.RutaRequestDto;
 import com.asturutas.spring.web.app.dto.ruta.RutaResponseDto;
@@ -38,6 +38,13 @@ public class RutaController {
 		model.addAttribute("rutas", rutas);
 		return "index";
 	}
+	
+    @GetMapping("/rutas/{id}")
+    public String findById(Model model, @PathVariable Integer id) {
+    	RutaResponseDto rutaResponseDto = rutaService.findById(id);
+    	model.addAttribute("ruta", rutaResponseDto);
+    	return "ruta-individual";
+    }
 
 
     @GetMapping("/rutas/crear")
@@ -69,11 +76,17 @@ public class RutaController {
     	return "redirect:/";
     }
     
-    @GetMapping("/rutas/{id}")
-    public String findById(Model model, @PathVariable Integer id) {
-    	RutaResponseDto rutaResponseDto = rutaService.findById(id);
-    	model.addAttribute("ruta", rutaResponseDto);
-    	return "ruta-individual";
+    @GetMapping("/rutas/actividad")
+    public String findRutasByActividad(Model model) {
+        model.addAttribute("actividades", actividadService.findAll());
+        return "filtrar-por-actividad";
+    }
+
+    @PostMapping("/rutas/actividad/mostrar")
+    public String mostrarRutasByActividad(Model model, @RequestParam String actividad) {
+        List<RutaResponseDto> rutaResponseDtoList = rutaService.findRutasByActividad(actividad);
+        model.addAttribute("rutasList", rutaResponseDtoList);
+        return "por-actividad";
     }
     
    

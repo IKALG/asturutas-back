@@ -16,4 +16,6 @@ public interface RutaService {
 	RutaResponseDto update(int id, RutaRequestDto rutaRequestDto);
 
 	RutaResponseDto delete(int id);
+	
+	List <RutaResponseDto> findRutasByActividad (String actividad);
 }
