@@ -20,4 +20,11 @@ public interface RutaService {
 	List <RutaResponseDto> findRutasByActividad (String actividad);
 	
 	List <RutaResponseDto> findRutasByMunicipio (String municipio);
+	
+	List <RutaResponseDto> findRutasByMovilidad();
+	
+	List <RutaResponseDto> findRutasByPerros();
+	
+	List <RutaResponseDto> findRutasByNinos();
+	
 }

@@ -102,6 +102,27 @@ public class RutaController {
         return "por-municipio";
     }
     
+    @GetMapping("rutas/movilidad")
+    public String findRutasPorMovilidad(Model model) {
+    	List<RutaResponseDto> rutaResponseDtoList = rutaService.findRutasByMovilidad();
+    	model.addAttribute("rutasList", rutaResponseDtoList);
+    	return "movilidad-reducida";
+    }
+    
+    @GetMapping("rutas/perros")
+    public String findRutasPorPerros(Model model) {
+    	List<RutaResponseDto> rutaResponseDtoList = rutaService.findRutasByPerros();
+    	model.addAttribute("rutasList", rutaResponseDtoList);
+    	return "para-perros";
+    }
+    
+    @GetMapping("rutas/ninos")
+    public String findRutasPorNinos(Model model) {
+    	List<RutaResponseDto> rutaResponseDtoList = rutaService.findRutasByNinos();
+    	model.addAttribute("rutasList", rutaResponseDtoList);
+    	return "para-ninos";
+    }
+    
    
 //	@GetMapping("/rutas")
 //	public ModelAndView rutas() {

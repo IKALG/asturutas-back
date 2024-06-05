@@ -2,95 +2,186 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <!-- <link rel="stylesheet" href="css/carrusel.css"> -->
-  <link rel="shortcut icon" type="image/png" href="/imagenes/logo.png"><a href="index.html"></a>
-  <title>Movilidad reducida</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="shortcut icon" type="image/png" href="/imagenes/logo.png">
+	<title>Por movilidad reducida</title>
+	<style>
+		.ruta-container {
+			max-height: 500px;
+			overflow: auto;
+			background-color: #343a40;
+			padding: 1rem;
+			border-radius: .25rem;
+			margin-bottom: 1.5rem;
+		}
+
+		.ruta-info {
+			margin-bottom: 1rem;
+		}
+
+		.ruta-info span {
+			margin-right: 1rem;
+		}
+
+		.carousel-item img {
+			object-fit: cover;
+		}
+
+		.ruta-heading {
+			margin-bottom: 1rem;
+		}
+
+		.btn-custom {
+			background-color: #6c757d;
+			border: none;
+			color: white;
+		}
+
+		.btn-custom:hover {
+			background-color: #5a6268;
+		}
+
+		.btn-custom:focus,
+		.btn-custom:active {
+			background-color: #5a6268;
+			box-shadow: none;
+		}
+	</style>
 </head>
 
 <body class="bg-dark">
-  <header class="p-3 text-bg-primary mt-2">
-    <section class="container">
-      <section class="row align-items-center justify-content-between">
-        <!-- Logo y Menú -->
-        <section class="col-lg-auto d-flex align-items-center">
-          <a href="/" class="text-decoration-none me-3">
-            <img src="/imagenes/logo.png" alt="Logo" width="50" height="auto">
-          </a>
-		  <ul class="nav">
-		    <li class="nav-item"><a href="/" class="nav-link px-2 text-white">Inicio</a></li>
-		    <li class="nav-item"><a href="/por-municipio" class="nav-link px-2 text-white">Por municipio</a></li>
-		    <li class="nav-item"><a href="/por-actividad" class="nav-link px-2 text-white">Por actividad</a></li>
-		    <li class="nav-item"><a href="/movilidad-reducida" class="nav-link px-2 text-warning">Movilidad reducida</a></li>
-		    <li class="nav-item"><a href="/para-perros" class="nav-link px-2 text-white">Aptas para perros</a></li>
-		    <li class="nav-item"><a href="/para-ninos" class="nav-link px-2 text-white">Aptas para niños</a></li>            
-		    <li class="nav-item"><a href="/contacto" class="nav-link px-2 text-dark">Contacto</a></li>
-		  </ul>
-        </section>
+	<header class="p-3 text-bg-primary mt-2">
+		<section class="container">
+			<section class="row align-items-center justify-content-between">
+				<!-- Logo y Menú -->
+				<section class="col-lg-auto d-flex align-items-center">
+					<a href="/" class="text-decoration-none me-3">
+						<img src="/imagenes/logo.png" alt="Logo" width="50" height="auto">
+					</a>
+					<ul class="nav">
+						<li class="nav-item"><a href="/" class="nav-link px-2 text-warning">Inicio</a></li>
+						<li class="nav-item"><a href="/rutas/municipio" class="nav-link px-2 text-white">Por
+								municipio</a></li>
+						<li class="nav-item"><a href="/rutas/actividad" class="nav-link px-2 text-white">Por
+								actividad</a></li>
+						<li class="nav-item"><a href="/rutas/movilidad" class="nav-link px-2 text-white">Movilidad
+								reducida</a></li>
+						<li class="nav-item"><a href="/rutas/perros" class="nav-link px-2 text-white">Aptas para
+								perros</a></li>
+						<li class="nav-item"><a href="/rutas/ninos" class="nav-link px-2 text-white">Aptas para
+								niños</a></li>
+						<li class="nav-item"><a href="/contacto" class="nav-link px-2 text-dark">Contacto</a></li>
+					</ul>
+				</section>
+	</header>
 
-        <!-- Formulario de Búsqueda y Botones -->
-		 <section class="col-lg-auto mt-3 mt-lg-0">
-		   <section class="text-end">
-		     <button type="button" class="btn btn-outline-light me-2">Inicia sesión</button>
-		     <button type="button" class="btn btn-warning">Regístrate</button>
-		   </section>
-		   <form class="mt-2">
-		     <input type="search" class="form-control form-control-dark text-bg-warning" placeholder="Buscar...">
-		   </form>
-		 </section>
+	<section class="container mt-4 mb-4">
+		<section class="row justify-content-center">
+			<section class="col-12 col-md-10">
+				<div class="table-responsive">
+					<div th:each="ruta : ${rutasList}" class="ruta-container">
+						<h2 class="text-white fw-bold ruta-heading" th:text="${ruta.nombre}">Nombre de la Ruta</h2>
+						<div class="d-flex">
+							<div id="carousel${ruta.id}" class="carousel slide mb-3 me-3" data-bs-ride="carousel"
+								style="width: 350px;">
+								<div class="carousel-inner">
+									<div th:if="${ruta.fotouno}" class="carousel-item active">
+										<img th:src="@{'/imagenes/' + ${ruta.fotouno}}" class="d-block w-100"
+											alt="Foto de la Ruta">
+									</div>
+									<div th:if="${ruta.fotodos}" class="carousel-item">
+										<img th:src="@{'/imagenes/' + ${ruta.fotodos}}" class="d-block w-100"
+											alt="Foto de la Ruta">
+									</div>
+									<div th:if="${ruta.fototres}" class="carousel-item">
+										<img th:src="@{'/imagenes/' + ${ruta.fototres}}" class="d-block w-100"
+											alt="Foto de la Ruta">
+									</div>
+									<div th:if="${ruta.fotocuatro}" class="carousel-item">
+										<img th:src="@{'/imagenes/' + ${ruta.fotocuatro}}" class="d-block w-100"
+											alt="Foto de la Ruta">
+									</div>
+									<div th:if="${ruta.fotocinco}" class="carousel-item">
+										<img th:src="@{'/imagenes/' + ${ruta.fotocinco}}" class="d-block w-100"
+											alt="Foto de la Ruta">
+									</div>
+								</div>
+								<button class="carousel-control-prev" type="button" data-bs-target="#carousel${ruta.id}"
+									data-bs-slide="prev">
+									<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+									<span class="visually-hidden">Previous</span>
+								</button>
+								<button class="carousel-control-next" type="button" data-bs-target="#carousel${ruta.id}"
+									data-bs-slide="next">
+									<span class="carousel-control-next-icon" aria-hidden="true"></span>
+									<span class="visually-hidden">Next</span>
+								</button>
+							</div>
+
+							<div class="ruta-info text-white">
+								<span><strong>Distancia:</strong> <span
+										th:text="${ruta.distancia} + ' km'">Distancia</span></span>
+								<span><strong>Duración:</strong> <span
+										th:text="${ruta.duracion} + ' h'">Duración</span></span>
+								<span><strong>Dificultad:</strong> <span
+										th:text="${ruta.dificultad}">Dificultad</span></span>
+								<br>
+								<span><strong>Movilidad Reducida:</strong> <span
+										th:text="${ruta.movilidadReducida} ? 'Sí' : 'No'">Movilidad
+										Reducida</span></span>
+								<br>
+								<span><strong>Apto para Niños:</strong> <span
+										th:text="${ruta.aptoNinos} ? 'Sí' : 'No'">Apto para Niños</span></span>
+								<br>
+								<span><strong>Apto para Perros:</strong> <span
+										th:text="${ruta.aptoPerros} ? 'Sí' : 'No'">Apto para Perros</span></span>
+								<br>
+								<strong>Municipios:</strong>
+								<span th:each="municipio, iterStat : ${ruta.municipios}">
+									<span th:text="${municipio.nombre}"></span>
+									<span th:if="${!iterStat.last}">-</span>
+								</span>
+								<br>
+								<strong>Actividades:</strong>
+								<span th:each="actividad, iterStat : ${ruta.actividades}">
+									<span th:text="${actividad.nombre}"></span>
+									<span th:if="${!iterStat.last}">-</span>
+								</span>
+							</div>
+						</div>
+						<div class="ruta-info text-primary">
+							<strong>Usuario:</strong> <span th:text="${ruta.usuario}">Usuario</span>
+						</div>
+						<div>
+							<a th:href="@{/rutas/{id}(id=${ruta.id})}" class="btn btn-custom btn-sm">Ver ruta</a>
+							<a th:href="@{/rutas/editar/{id}(id=${ruta.id})}" class="btn btn-custom btn-sm">Editar</a>
+							<a th:href="@{/rutas/eliminar/{id}(id=${ruta.id})}"
+								class="btn btn-custom btn-sm">Eliminar</a>
+						</div>
+					</div>
+				</div>
+			</section>
 		</section>
-    </section>
-  </header>
+	</section>
 
-  <section class="container-fluid mt-2">
-    <section class="row justify-content-center align-items-center" style="height: auto;">
-      <section class="col">
-        <section id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-          <section class="carousel-inner">
-            <section class="carousel-item active">
-              <img src="/imagenes/cares.png" class="d-block w-100" alt="Imagen 1">
-            </section>
-            <section class="carousel-item">
-              <img src="/imagenes/alba.png" class="d-block w-100" alt="Imagen 2">
-            </section>
-            <section class="carousel-item">
-              <img src="/imagenes/fuso.png" class="d-block w-100" alt="Imagen 3">
-            </section>
-          </section>
-          <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only"></span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only"></span>
-          </a>
-        </section>
-      </section>
-    </section>
-  </section>
+	<div class="d-grid">
+		<a th:href="@{/}" class="btn btn-secondary btn-sm mb-1">Volver a inicio</a>
+	</div>
 
-  <footer class="mt-2">
-    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 bg-primary text-warning border-0">
-      <div class="col-md-4 d-flex align-items-center">
-        <a href="/" class="mb-3 me-2 mb-md-0 text-decoration-none lh-1">
-          <img src="/imagenes/logo.png" style="margin-left: 20px;" class="bi" width="24" alt="Logo">
-        </a>
-        <span class="mb-3 mb-md-0">&copy; 2024 Asturutas</span>
-      </div>
-    </footer>
-  </footer>
+	<footer class="mt-2">
+		<div class="d-flex flex-wrap justify-content-between align-items-center py-3 bg-primary text-warning border-0">
+			<div class="col-md-4 d-flex align-items-center">
+				<a href="/" class="mb-3 me-2 mb-md-0 text-decoration-none lh-1">
+					<img src="/imagenes/logo.png" style="margin-left: 20px;" class="bi" width="24" alt="Logo">
+				</a>
+				<span class="mb-3 mb-md-0">&copy; 2024 Asturutas</span>
+			</div>
+		</div>
+	</footer>
 
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

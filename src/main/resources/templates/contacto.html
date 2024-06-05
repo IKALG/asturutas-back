@@ -1,96 +1,147 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <!-- <link rel="stylesheet" href="css/carrusel.css"> -->
-  <link rel="shortcut icon" type="image/png" href="/imagenes/logo.png"><a href="index.html"></a>
-  <title>Contacto</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="/imagenes/logo.png">
+    <title>Contacto - Asturutas</title>
+    <style>
+        .content-container {
+            background-color: #343a40;
+            padding: 1rem;
+            border-radius: .25rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .btn-custom {
+            background-color: #6c757d;
+            border: none;
+            color: white;
+        }
+
+        .btn-custom:hover {
+            background-color: #5a6268;
+        }
+
+        .btn-custom:focus,
+        .btn-custom:active {
+            background-color: #5a6268;
+            box-shadow: none;
+        }
+    </style>
 </head>
 
 <body class="bg-dark">
-  <header class="p-3 text-bg-primary mt-2">
-    <section class="container">
-      <section class="row align-items-center justify-content-between">
-        <!-- Logo y Menú -->
-        <section class="col-lg-auto d-flex align-items-center">
-          <a href="/" class="text-decoration-none me-3">
-            <img src="/imagenes/logo.png" alt="Logo" width="50" height="auto">
-          </a>
-		  <ul class="nav">
-		    <li class="nav-item"><a href="/" class="nav-link px-2 text-white">Inicio</a></li>
-		    <li class="nav-item"><a href="/por-municipio" class="nav-link px-2 text-white">Por municipio</a></li>
-		    <li class="nav-item"><a href="/por-actividad" class="nav-link px-2 text-white">Por actividad</a></li>
-		    <li class="nav-item"><a href="/movilidad-reducida" class="nav-link px-2 text-white">Movilidad reducida</a></li>
-		    <li class="nav-item"><a href="/para-perros" class="nav-link px-2 text-white">Aptas para perros</a></li>
-		    <li class="nav-item"><a href="/para-ninos" class="nav-link px-2 text-white">Aptas para niños</a></li>            
-		    <li class="nav-item"><a href="/contacto" class="nav-link px-2 text-warning">Contacto</a></li>
-		  </ul>
+    <header class="p-3 text-bg-primary mt-2">
+        <section class="container">
+            <section class="row align-items-center justify-content-between">
+                <section class="col-lg-auto d-flex align-items-center">
+                    <a href="/" class="text-decoration-none me-3">
+                        <img src="/imagenes/logo.png" alt="Logo" width="50" height="auto">
+                    </a>
+                    <ul class="nav">
+                        <li class="nav-item"><a href="/" class="nav-link px-2 text-warning">Inicio</a></li>
+                        <li class="nav-item"><a href="/rutas/municipio" class="nav-link px-2 text-white">Por municipio</a></li>
+                        <li class="nav-item"><a href="/rutas/actividad" class="nav-link px-2 text-white">Por actividad</a></li>
+                        <li class="nav-item"><a href="/rutas/movilidad" class="nav-link px-2 text-white">Movilidad reducida</a></li>
+                        <li class="nav-item"><a href="/rutas/perros" class="nav-link px-2 text-white">Aptas para perros</a></li>
+                        <li class="nav-item"><a href="/rutas/ninos" class="nav-link px-2 text-white">Aptas para niños</a></li>
+                        <li class="nav-item"><a href="/contacto" class="nav-link px-2 text-dark">Contacto</a></li>
+                    </ul>
+                </section>
+            </section>
         </section>
+    </header>
 
-        <!-- Formulario de Búsqueda y Botones -->
-		 <section class="col-lg-auto mt-3 mt-lg-0">
-		   <section class="text-end">
-		     <button type="button" class="btn btn-outline-light me-2">Inicia sesión</button>
-		     <button type="button" class="btn btn-warning">Regístrate</button>
-		   </section>
-		   <form class="mt-2">
-		     <input type="search" class="form-control form-control-dark text-bg-warning" placeholder="Buscar...">
-		   </form>
-		 </section>
-		</section>
-    </section>
-  </header>
+    <section class="container mt-4">
+        <section class="row justify-content-center">
+            <section class="col-12 col-md-10">
+                <h1 class="text-center text-white mb-4">Contacto</h1>
+                <div class="content-container">
+                    <h2 class="text-white fw-bold mb-3">Bienvenido a Asturutas</h2>
+                    <p>
+                        Bienvenido a <strong>Asturutas</strong>, tu plataforma para descubrir, compartir y disfrutar de
+                        las mejores rutas de la Comunidad Autónoma de Asturias.
+                        Aquí, los amantes de la naturaleza, el senderismo y las actividades al aire libre pueden
+                        encontrar una variedad de rutas detalladas, desde senderos costeros hasta desafiantes ascensos
+                        montañosos.
+                    </p>
+                    <h3 class="text-white fw-bold mt-4">¿Qué Puedes Hacer en Asturutas?</h3>
+                    <ul>
+                        <li><strong>Explorar Rutas:</strong> Navega por una amplia selección de rutas con descripciones
+                            detalladas, fotografías y toda la información que necesitas para tu aventura.</li>
+                        <li><strong>Compartir tus Propias Rutas:</strong> Regístrate y sube tus rutas favoritas.
+                            Comparte tu experiencia con la comunidad y ayuda a otros a descubrir lugares increíbles.
+                        </li>
+                        <li><strong>Información Completa:</strong> Cada ruta incluye detalles como distancia, duración,
+                            nivel de dificultad, accesibilidad, y si es apta para niños y perros.</li>
+                        <li><strong>Galería de Imágenes:</strong> Disfruta de fotografías que muestran la belleza de
+                            cada ruta, con un carrusel de imágenes para una vista más completa.</li>
+                        <li><strong>Conectar con Otros Usuarios:</strong> Interactúa con otros entusiastas de la
+                            naturaleza, comparte consejos y recomendaciones.</li>
+                    </ul>
+                    <h3 class="text-white fw-bold mt-4">Únete a la Comunidad de Asturutas</h3>
+                    <p>
+                        Regístrate hoy y empieza a explorar las maravillas de Asturias. Comparte tus rutas, descubre
+                        nuevos senderos y únete a una comunidad apasionada por la naturaleza y la aventura.
+                    </p>
+                    <p class="text-primary fw-bold">¡Explora, comparte y disfruta de Asturias con Asturutas!</p>
 
-  <section class="container-fluid mt-2">
-    <section class="row justify-content-center align-items-center" style="height: auto;">
-      <section class="col">
-        <section id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-          <section class="carousel-inner">
-            <section class="carousel-item active">
-              <img src="/imagenes/cares.png" class="d-block w-100" alt="Imagen 1">
+                    <section class="container mt-4">
+                        <section class="row justify-content-center">
+                            <section class="col-lg-6">
+                                <h1 class="text-center text-white mb-4">Formulario de Contacto</h1>
+                                <form th:action="@{/contacto}" th:object="${consultaRequestDto}" method="post" class="form-container">
+                                    <div class="mb-3">
+                                        <label for="correo" class="form-label text-white">Correo:</label>
+                                        <input type="email" id="correo" th:field="*{correo}" class="form-control" placeholder="Correo" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="consulta" class="form-label text-white">Consulta:</label>
+                                        <textarea id="consulta" th:field="*{mensaje}" class="form-control" rows="4" placeholder="Escribe tu consulta aquí..." required></textarea>
+                                    </div>
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-primary">Enviar Consulta</button>
+                                    </div>
+                                </form>
+                            </section>
+                        </section>
+                    </section>
+
+                    <div class="mt-4">
+                        <a href="/" class="btn btn-custom btn-sm">Volver atrás</a>
+                    </div>
+                </div>
             </section>
-            <section class="carousel-item">
-              <img src="/imagenes/alba.png" class="d-block w-100" alt="Imagen 2">
-            </section>
-            <section class="carousel-item">
-              <img src="/imagenes/fuso.png" class="d-block w-100" alt="Imagen 3">
-            </section>
-          </section>
-          <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only"></span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only"></span>
-          </a>
         </section>
-      </section>
     </section>
-  </section>
 
-  <footer class="mt-2">
-    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 bg-primary text-warning border-0">
-      <div class="col-md-4 d-flex align-items-center">
-        <a href="/" class="mb-3 me-2 mb-md-0 text-decoration-none lh-1">
-          <img src="/imagenes/logo.png" style="margin-left: 20px;" class="bi" width="24" alt="Logo">
-        </a>
-        <span class="mb-3 mb-md-0">&copy; 2024 Asturutas</span>
-      </div>
+    <footer class="mt-2">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 bg-primary text-warning border-0">
+            <div class="col-md-4 d-flex align-items-center">
+                <a href="/" class="mb-3 me-2 mb-md-0 text-decoration-none lh-1">
+                    <img src="/imagenes/logo.png" style="margin-left: 20px;" class="bi" width="24" alt="Logo">
+                </a>
+                <span class="mb3 mb-md-0">&copy; 2024 Asturutas</span>
+            </div>
+        </footer>
     </footer>
-  </footer>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('success')) {
+                alert("Tus datos se han enviado correctamente. En breves recibirás una respuesta.");
+            }
+        });
+    </script>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55"></script>
 </body>
 
 </html>
