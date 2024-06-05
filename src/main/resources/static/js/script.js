@@ -2,15 +2,21 @@ $(document).ready(function(){
 
     function redirigirInicio() {
         $("#login").click(function(){
-            window.location.href = "/usuarios/iniciar";
+            window.location.href = "/login";
         });
     }
 
     function redirigirRegistro() {
         $("#register").click(function(){
-            window.location.href = "/usuarios/registrar";
+            window.location.href = "/register";
         });
     }
+    
+    function cerrarSesion() {
+		$("#logout").click(function(){
+            window.location.href = "/logout";
+        });
+	}
     
     function realizarRegistro() {
 		$("#registro").click(function() {
@@ -22,4 +28,5 @@ $(document).ready(function(){
     redirigirInicio();
     redirigirRegistro();
     realizarRegistro();
+    cerrarSesion();
 });

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/springsecurity5">
 
 <head>
   <meta charset="UTF-8">
@@ -72,7 +72,8 @@
           <section class="text-end">
             <button type="button" id="login" name="login" class="btn btn-outline-light me-2">Inicia sesión</button>
             <button type="button" id="register" name="register" class="btn btn-warning">Regístrate</button>
-          </section>
+          	<p sec:authorize="isAuthenticated()">ESTOY EN LA SESION</p>
+			</section>
         </section>
       </section>
     </section>

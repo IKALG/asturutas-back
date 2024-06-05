@@ -1,7 +1,5 @@
 package com.asturutas.spring.web.app;
 
-import java.sql.Driver;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
