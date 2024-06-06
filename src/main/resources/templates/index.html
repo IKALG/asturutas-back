@@ -68,12 +68,19 @@
         </section>
 
         <!-- Formulario de Búsqueda y Botones -->
-        <section class="col-lg-auto mt-3 mt-lg-0">
-          <section class="text-end">
-            <button type="button" id="login" name="login" class="btn btn-outline-light me-2">Inicia sesión</button>
-            <button type="button" id="register" name="register" class="btn btn-warning">Regístrate</button>
-          	<!-- <p sec:authorize="isAuthenticated()">ESTOY EN LA SESION</p> -->
-			</section>
+		<section class="col-lg-auto mt-3 mt-lg-0">
+		    <section class="text-end" th:if="${user == null}">
+		        <button type="button" id="login" name="login" class="btn btn-outline-light me-2">Inicia sesión</button>
+		        <button type="button" id="register" name="register" class="btn btn-warning">Regístrate</button>
+		    </section>
+		    <section class="text-end" th:if="${user != null}">
+		        <div class="d-flex align-items-center justify-content-end">
+		            <p class="mb-0 me-3"><strong><span th:text="${user}"></span></strong></p>
+		            <form th:action="@{/logout}" method="post" class="mb-0">
+		                <button type="submit" id="logout" name="logout" class="btn btn-outline-light">Cerrar sesión</button>
+		            </form>
+		        </div>
+		    </section>
         </section>
       </section>
     </section>
@@ -110,6 +117,8 @@
   <section class="container mt-4 mb-4">
           <section class="row justify-content-center">
               <section class="col-12 col-md-10">
+				<button th:if="${user != null}" type="button" id="nuevaRuta" name="nuevaRuta" class="btn btn-outline-light me-2 mb-4">Subir ruta nueva</button>
+				<button th:if="${user != null}" type="button" id="misRutas" name="misRutas" class="btn btn-primary me-2 mb-4">Mis Rutas</button>
                   <div class="table-responsive">
                       <div th:each="ruta : ${rutas}" class="ruta-container">
                           <h2 class="text-white fw-bold ruta-heading" th:text="${ruta.nombre}">Nombre de la Ruta</h2>

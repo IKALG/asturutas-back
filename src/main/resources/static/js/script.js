@@ -17,6 +17,12 @@ $(document).ready(function(){
             window.location.href = "/logout";
         });
 	}
+	
+	    function nuevaRuta() {
+		$("#nuevaRuta").click(function(){
+            window.location.href = "/rutas/crear";
+        });
+	}
     
     function realizarRegistro() {
 		$("#registro").click(function() {
@@ -29,4 +35,5 @@ $(document).ready(function(){
     redirigirRegistro();
     realizarRegistro();
     cerrarSesion();
+    nuevaRuta();
 });

@@ -115,8 +115,8 @@
                             </span>
                             <br>
                             <strong>Actividades:</strong>
-                            <span th:each="municipio, iterStat : ${ruta.municipios}">
-                                <span th:text="${municipio.nombre}"></span>
+                            <span th:each="actividad, iterStat : ${ruta.actividades}">
+                                <span th:text="${actividad.nombre}"></span>
                                 <span th:if="${!iterStat.last}">-</span>
                             </span>
                         </div>

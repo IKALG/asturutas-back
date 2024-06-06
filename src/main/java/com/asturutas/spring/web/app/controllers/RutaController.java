@@ -1,5 +1,6 @@
 package com.asturutas.spring.web.app.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +34,9 @@ public class RutaController {
 	private ActividadService actividadService;
 
 	@GetMapping("/")
-	public String findAll(Model model) {
+	public String findAll(Model model, Principal principal) {
 		List<RutaResponseDto> rutas = rutaService.findAll();
+	    model.addAttribute("user", principal != null ? principal.getName() : null);
 		model.addAttribute("rutas", rutas);
 		return "index";
 	}
@@ -48,8 +50,9 @@ public class RutaController {
 
 
     @GetMapping("/rutas/crear")
-    public String create(Model model) {
+    public String create(Model model, Principal principal) {
         model.addAttribute("rutaRequestDto", new RutaRequestDto());
+	    model.addAttribute("user", principal != null ? principal.getName() : null);
         model.addAttribute("actividades", actividadService.findAll());
         model.addAttribute("municipios", municipioService.findAll());
         return "añadir-ruta";

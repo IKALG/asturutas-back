@@ -186,7 +186,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             session.invalidate();
         }
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("login");
+        modelAndView.setViewName("index");
         return modelAndView;
     }
  

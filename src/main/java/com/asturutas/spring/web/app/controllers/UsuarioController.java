@@ -73,14 +73,5 @@ public class UsuarioController {
     public ModelAndView home(HttpServletRequest request) {
         return usuarioService.home(request);
     }
-    
-    @GetMapping("/current-user")
-    public String getCurrentUser() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof UserDetails) {
-            return ((UserDetails) principal).getUsername();
-        } else {
-            return principal.toString();
-        }
-    }
+
 }
