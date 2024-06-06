@@ -105,12 +105,26 @@ public class RutaController {
         return "por-municipio";
     }
     
+    @GetMapping("/rutas/usuario")
+    public String findRutasByUsuario(Model model, Principal principal) {
+	    model.addAttribute("user", principal != null ? principal.getName() : null);
+        return "filtrar-por-usuario";
+    }
+    
+    @PostMapping("rutas/usuario/mostrar")
+    public String mostrarRutasByUsuario(Model model, @RequestParam String usuario) {
+        List<RutaResponseDto> rutaResponseDtoList = rutaService.findRutasByUsuario(usuario);
+        model.addAttribute("rutasList", rutaResponseDtoList);
+        return "por-usuario";
+    }
+    
     @GetMapping("rutas/movilidad")
     public String findRutasPorMovilidad(Model model) {
     	List<RutaResponseDto> rutaResponseDtoList = rutaService.findRutasByMovilidad();
     	model.addAttribute("rutasList", rutaResponseDtoList);
     	return "movilidad-reducida";
     }
+    
     
     @GetMapping("rutas/perros")
     public String findRutasPorPerros(Model model) {

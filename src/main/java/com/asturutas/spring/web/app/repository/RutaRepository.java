@@ -17,6 +17,9 @@ public interface RutaRepository extends JpaRepository<RutaEntity, Integer> {
 	@Query("SELECT r FROM RutaEntity r JOIN r.municipios m WHERE upper(m.nombre) = upper(?1)")
 	List<RutaEntity> findRutasByMunicipio(String municipio);
 	
+	@Query("SELECT r FROM RutaEntity r WHERE upper(r.usuario) = upper(?1)")
+	List<RutaEntity> findRutasByUsuario(String usuario);
+	
 	@Query("SELECT r FROM RutaEntity r WHERE r.movilidadReducida = true")
 	List<RutaEntity> findRutasByMovilidad();
 	

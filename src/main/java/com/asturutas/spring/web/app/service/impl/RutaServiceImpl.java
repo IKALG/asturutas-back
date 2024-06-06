@@ -109,6 +109,21 @@ public class RutaServiceImpl implements RutaService {
 			return rutaResponseDtoList;
 		}
 	}
+	
+	@Override
+	public List<RutaResponseDto> findRutasByUsuario(String usuario) {
+		List <RutaEntity> rutaEntityList = rutaRepository.findRutasByUsuario(usuario);
+		if(rutaEntityList.isEmpty()) {
+			return new ArrayList<>();
+		} else {
+			List <RutaResponseDto> rutaResponseDtoList = new ArrayList<>();
+			for (RutaEntity rutaEntity : rutaEntityList) {
+				RutaResponseDto rutaResponseDto = rutaMapper.entityToRutaResponseDto(rutaEntity);
+				rutaResponseDtoList.add(rutaResponseDto);
+			}
+			return rutaResponseDtoList;
+		}
+	}
 
 	@Override
 	public List<RutaResponseDto> findRutasByMovilidad() {

@@ -23,6 +23,12 @@ $(document).ready(function(){
             window.location.href = "/rutas/crear";
         });
 	}
+	
+		    function mostrarMisRutas() {
+		$("#misRutas").click(function(){
+            window.location.href = "/rutas/usuario";
+        });
+	}
     
     function realizarRegistro() {
 		$("#registro").click(function() {
@@ -36,4 +42,5 @@ $(document).ready(function(){
     realizarRegistro();
     cerrarSesion();
     nuevaRuta();
+    mostrarMisRutas();
 });
