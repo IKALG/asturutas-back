@@ -27,5 +27,8 @@ public class ConsultaEntity {
 
 	@Column(name = "mensaje")
 	private String mensaje;
+	
+	@Column(name = "leido")
+	private boolean leido;
 
 }

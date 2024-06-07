@@ -37,7 +37,9 @@ public class SecurityConfig {
         http.csrf().disable().authorizeRequests(requests -> requests
                 .requestMatchers("/", "/login").permitAll()
                 .requestMatchers("rutas/crear", "/rutas/editar/**")
-                .hasAuthority("ADMIN"))
+                .hasAuthority("ADMIN")
+        		.requestMatchers("rutas/crear", "/rutas/editar/**")
+        		.hasAuthority("USER"))
                 .formLogin(form -> form
                         .loginPage("/login")
                         .permitAll());

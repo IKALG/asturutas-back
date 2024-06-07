@@ -65,10 +65,10 @@ public class UsuarioEntity implements UserDetails {
 		permiso = new SimpleGrantedAuthority("ADMIN");
 		}
 		else if(this.getRolEntity().getId()==2) {
-		permiso = new SimpleGrantedAuthority("AUTORIZADO");
+		permiso = new SimpleGrantedAuthority("USER");
 		}
 		else {
-		permiso = new SimpleGrantedAuthority("USER");
+		permiso = new SimpleGrantedAuthority("-");
 		}
 		permisos.add(permiso);
 		return permisos;

@@ -8,9 +8,10 @@ import lombok.ToString;
 @Setter
 @ToString
 public class ConsultaResponseDto {
-	
-	private String correo;
+    
+    private String correo;
+    private String mensaje;
+    private boolean leido; // Campo para indicar si la consulta ha sido leída
 
-	private String mensaje;
-
+    // Constructor, getters y setters
 }

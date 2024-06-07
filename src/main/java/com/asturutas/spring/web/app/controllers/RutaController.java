@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,6 +40,14 @@ public class RutaController {
 	    model.addAttribute("user", principal != null ? principal.getName() : null);
 		model.addAttribute("rutas", rutas);
 		return "index";
+	}
+	
+	@GetMapping("/mostrar/rutas")
+	public String mostrarTodasLasRutas(Model model, Principal principal) {
+		List<RutaResponseDto> rutas = rutaService.findAll();
+	    model.addAttribute("user", principal != null ? principal.getName() : null);
+		model.addAttribute("rutas", rutas);
+		return "mostrar-rutas";
 	}
 	
     @GetMapping("/rutas/{id}")
@@ -78,6 +87,20 @@ public class RutaController {
     	rutaService.update(id, rutaRequestDto);
     	return "redirect:/";
     }
+    
+    @PostMapping("rutas/eliminar/{id}")
+    public String delete(@PathVariable Integer id) {
+        rutaService.delete(id);
+        return "por-usuario";
+    }
+
+    @GetMapping("rutas/eliminar/{id}")
+    public String confirmDelete(Model model, @PathVariable Integer id) {
+        RutaResponseDto rutaResponseDto = rutaService.findById(id);
+        model.addAttribute("ruta", rutaResponseDto);
+        return "confirmar-eliminacion"; // Página de confirmación de eliminación
+    }
+    
     
     @GetMapping("/rutas/actividad")
     public String findRutasByActividad(Model model) {

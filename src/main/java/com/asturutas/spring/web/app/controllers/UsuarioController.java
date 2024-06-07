@@ -1,9 +1,11 @@
 package com.asturutas.spring.web.app.controllers;
 
+import java.security.Principal;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.asturutas.spring.web.app.dto.ruta.RutaResponseDto;
+import com.asturutas.spring.web.app.dto.usuario.UsuarioResponseDto;
 import com.asturutas.spring.web.app.entity.UsuarioEntity;
 import com.asturutas.spring.web.app.service.UsuarioService;
 
@@ -24,9 +28,12 @@ public class UsuarioController {
     private UsuarioService usuarioService;
  
     @GetMapping("/usuarios")
-    public ModelAndView getUsuarios() {
-        return usuarioService.getUsuarios();
-    }
+	public String findAll(Model model, Principal principal) {
+		List<UsuarioResponseDto> usuarios = usuarioService.findAll();
+	    model.addAttribute("user", principal != null ? principal.getName() : null);
+		model.addAttribute("usuarios", usuarios);
+		return "mostrar-usuarios";
+	}
  
     @GetMapping("/usuario/add")
     public ModelAndView addUsuario() {
@@ -52,6 +59,19 @@ public class UsuarioController {
     @PostMapping("/login")
     public ModelAndView loginUser(@ModelAttribute("user") UsuarioEntity user, HttpServletRequest request) {
         return usuarioService.loginUser(user,request);
+    }
+    
+    @GetMapping("usuarios/eliminar/{id}")
+    public String confirmDelete(Model model, @PathVariable("id") String usuario) {
+        UsuarioResponseDto usuarioResponseDto = usuarioService.findByUsuario(usuario);
+        model.addAttribute("usuario", usuarioResponseDto);
+        return "eliminar-usuario"; // Página de confirmación de eliminación
+    }
+
+    @PostMapping("usuarios/eliminar/{id}")
+    public String delete(@PathVariable("id") String usuario) {
+        usuarioService.delete(usuario);
+        return "redirect:/usuarios"; // Redirigir a la lista de usuarios después de la eliminación
     }
  
     @GetMapping("/register")
