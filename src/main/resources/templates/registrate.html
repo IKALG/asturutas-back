@@ -33,6 +33,9 @@
             background-color: #5a6268;
             box-shadow: none;
         }
+        .password-strength {
+            font-weight: bold;
+        }
     </style>
     <script src="/js/jquery-3.7.1.js"></script>
     <script src="/js/script.js"></script>
@@ -65,7 +68,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="contrasena" class="form-label text-white">Contraseña:</label>
-                        <input type="password" id="contrasena" name="contrasena" class="form-control" placeholder="Contraseña" required th:field="*{password}">
+                        <input type="password" id="contrasena" name="contrasena" class="form-control" placeholder="Contraseña" required th:field="*{password}" oninput="checkPasswordStrength()">
+                        <div id="password-strength" class="password-strength mt-2"></div>
                     </div>
                     <div class="mb-3">
                         <label for="confirmarContrasena" class="form-label text-white">Confirmar Contraseña:</label>
@@ -79,7 +83,7 @@
                         <button type="submit" class="btn btn-primary">Registrar mi Cuenta</button>
                         <br>
                         <a th:href="@{/}" class="btn btn-secondary btn-sm mb-1">Volver a inicio</a>
-                        <a th:href="@{/usuarios/iniciar}" class="btn btn-secondary btn-sm mb-1">¿No es tu primera vez? Inicia sesión</a>
+                        <a th:href="@{/login}" class="btn btn-secondary btn-sm mb-1">¿No es tu primera vez? Inicia sesión</a>
                     </div>
                 </form>
 
@@ -114,6 +118,10 @@
                 alert("Las contraseñas no coinciden.");
                 return false;
             }
+            if (contrasena.length < 8) {
+                alert("La contraseña debe tener al menos 8 caracteres.");
+                return false;
+            }
             return true;
         }
 
@@ -126,6 +134,37 @@
             } else {
                 contrasena.type = "password";
                 confirmarContrasena.type = "password";
+            }
+        }
+
+        function checkPasswordStrength() {
+            var contrasena = document.getElementById("contrasena").value;
+            var strengthText = document.getElementById("password-strength");
+            var strength = 0;
+
+            if (contrasena.length >= 8) strength += 1;
+            if (/[A-Z]/.test(contrasena)) strength += 1;
+            if (/[a-z]/.test(contrasena)) strength += 1;
+            if (/[0-9]/.test(contrasena)) strength += 1;
+            if (/[\W]/.test(contrasena)) strength += 1;
+
+            switch (strength) {
+                case 1:
+                case 2:
+                    strengthText.textContent = "Contraseña débil";
+                    strengthText.style.color = "red";
+                    break;
+                case 3:
+                    strengthText.textContent = "Contraseña media";
+                    strengthText.style.color = "orange";
+                    break;
+                case 4:
+                case 5:
+                    strengthText.textContent = "Contraseña fuerte";
+                    strengthText.style.color = "green";
+                    break;
+                default:
+                    strengthText.textContent = "";
             }
         }
     </script>

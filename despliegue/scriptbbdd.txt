@@ -1,0 +1,136 @@
+----- SCRIPT BBDD -----
+
+-- public.actividad definition
+
+-- Drop table
+
+-- DROP TABLE public.actividad;
+
+CREATE TABLE public.actividad (
+	nombre varchar(100) NOT NULL,
+	CONSTRAINT actividad_pk PRIMARY KEY (nombre)
+);
+
+-- public.consultas definition
+
+-- Drop table
+
+-- DROP TABLE public.consultas;
+
+CREATE TABLE public.consultas (
+	correo varchar(255) NULL,
+	mensaje varchar(2000) NULL,
+	id serial4 NOT NULL,
+	leido bool NOT NULL,
+	CONSTRAINT consultas_pk PRIMARY KEY (id)
+);
+
+-- public.municipios definition
+
+-- Drop table
+
+-- DROP TABLE public.municipios;
+
+CREATE TABLE public.municipios (
+	nombre varchar(100) NOT NULL,
+	CONSTRAINT municipios_pk PRIMARY KEY (nombre)
+);
+
+-- public.roles definition
+
+-- Drop table
+
+-- DROP TABLE public.roles;
+
+CREATE TABLE public.roles (
+	id serial4 NOT NULL,
+	nombre varchar(100) NULL,
+	CONSTRAINT roles_pk PRIMARY KEY (id)
+);
+
+-- public.usuarios definition
+
+-- Drop table
+
+-- DROP TABLE public.usuarios;
+
+CREATE TABLE public.usuarios (
+	nombre varchar(100) NOT NULL,
+	usuario varchar(100) NOT NULL,
+	email varchar(100) NOT NULL,
+	contrasena varchar(100) NOT NULL,
+	fecha_creacion timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	id_rol int4 NULL,
+	CONSTRAINT usuarios_pk PRIMARY KEY (usuario)
+);
+
+
+
+-- public.rutas definition
+
+-- Drop table
+
+-- DROP TABLE public.rutas;
+
+CREATE TABLE public.rutas (
+	id serial4 NOT NULL,
+	nombre varchar(100) NOT NULL,
+	descripcion text NOT NULL,
+	distancia float8 NOT NULL,
+	dificultad varchar(50) NOT NULL,
+	duracion float8 NOT NULL,
+	usuario_usuario varchar(100) NOT NULL,
+	movilidad_reducida bool NOT NULL,
+	apto_ninos bool NOT NULL,
+	apto_perros bool NOT NULL,
+	fotouno varchar(255) NULL,
+	fotodos varchar(255) NULL,
+	fototres varchar(255) NULL,
+	fotocuatro varchar(255) NULL,
+	fotocinco varchar(255) NULL,
+	CONSTRAINT rutas_pkey PRIMARY KEY (id)
+);
+
+
+-- public.rutas foreign keys
+
+ALTER TABLE public.rutas ADD CONSTRAINT rutas_usuarios_fk FOREIGN KEY (usuario_usuario) REFERENCES public.usuarios(usuario) ON DELETE CASCADE;
+
+-- public.actividad_rutas definition
+
+-- Drop table
+
+-- DROP TABLE public.actividad_rutas;
+
+CREATE TABLE public.actividad_rutas (
+	id_ruta int4 NOT NULL,
+	nombre_actividad varchar(100) NOT NULL,
+	id serial4 NOT NULL,
+	CONSTRAINT actividad_rutas_pk PRIMARY KEY (id)
+);
+
+
+-- public.actividad_rutas foreign keys
+
+ALTER TABLE public.actividad_rutas ADD CONSTRAINT actividad_municipios_rutas_fk FOREIGN KEY (id_ruta) REFERENCES public.rutas(id) ON DELETE CASCADE;
+ALTER TABLE public.actividad_rutas ADD CONSTRAINT actividad_rutas_actividad_fk FOREIGN KEY (nombre_actividad) REFERENCES public.actividad(nombre) ON DELETE CASCADE;
+
+-- public.municipios_rutas definition
+
+-- Drop table
+
+-- DROP TABLE public.municipios_rutas;
+
+CREATE TABLE public.municipios_rutas (
+	id serial4 NOT NULL,
+	id_ruta int4 NOT NULL,
+	nombre_municipio varchar(255) NOT NULL,
+	CONSTRAINT municipios_rutas_pkey PRIMARY KEY (id)
+);
+
+
+-- public.municipios_rutas foreign keys
+
+ALTER TABLE public.municipios_rutas ADD CONSTRAINT fk_municipio FOREIGN KEY (nombre_municipio) REFERENCES public.municipios(nombre) ON DELETE CASCADE;
+ALTER TABLE public.municipios_rutas ADD CONSTRAINT fk_ruta FOREIGN KEY (id_ruta) REFERENCES public.rutas(id) ON DELETE CASCADE;
+

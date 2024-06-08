@@ -36,9 +36,9 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests(requests -> requests
                 .requestMatchers("/", "/login").permitAll()
-                .requestMatchers("rutas/crear", "/rutas/editar/**")
+                .requestMatchers("/contacto/mostrar/consultas", "/usuarios/mostrar/", "/usuarios/eliminar/**" )
                 .hasAuthority("ADMIN")
-        		.requestMatchers("rutas/crear", "/rutas/editar/**")
+        		.requestMatchers("rutas/crear")
         		.hasAuthority("USER"))
                 .formLogin(form -> form
                         .loginPage("/login")
